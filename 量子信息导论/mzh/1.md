@@ -28,7 +28,7 @@
 
     若$H$不显含$t$, 则
     $$
-    \left|\varphi(t)\right>=U\left|\varphi(0)\right>, \,where\,U=\exp(iHt/\hbar)
+    \left|\varphi(t)\right>=U\left|\varphi(0)\right>, \,\mathrm{where}\,U=\exp(iHt/\hbar)
     $$
     此时 $UU^\dagger=U^\dagger U=I$.
 
@@ -51,9 +51,15 @@
 
 ### 1.4.1 混合态: 描述复合系统的子系统
 
+
+
 ### 1.4.2 密度矩阵的特征
 
+
+
 ### 1.4.3 Schmidt 分解定理
+
+
 
 ### 1.4.4 GHJW (Gisin-Hughstom-Josza-Wooters) 定理
 
@@ -134,7 +140,30 @@ $$
 
 ### 1.5.5 超算符
 
+#### 算符和表示
 
+- 算符和表示
+  $$
+  \begin{equation}
+  \begin{aligned}
+  $(\rho_A)
+&=\rho_A' \\
+  &= \mathrm{Tr}_B\left( U_{AB}(\rho_A\otimes\left|0\right>_B\sideset{_B}{}
+  {\left<0\right|})U_{AB}^\dagger \right)\\
+  &=\sum_\mu{ \sideset{_B}{_B}{\left<\mu|U_{AB}|0\right>} \rho_A \sideset{_B}{_B}{\left<0|U_{AB}|\mu\right>}}\\
+  &=\sum_\mu{M_\mu\rho_A M_\mu^\dagger}\\
+  \end{aligned}
+  \end{equation}
+  $$
+  其中 $M_\mu=\left<\mu|_BU_{AB}|0\right>_B$.
+  
+- 给定一个算符和表示，可以创造一个相应的幺正表示.
+
+- 给定一个超算符后，其算符和表示不唯一
+  $$
+  $(\rho_A)=\sum_\mu{M_\mu\rho_A M_\mu^\dagger}=\sum_\nu{N_\nu\rho_A N_\nu^\dagger},
+  $$
+  其中 $N_\nu=U_{\nu\mu}M_\mu$.
 
 ### 1.5.6 Kraus表示理论
 
@@ -143,9 +172,7 @@ $$
 - 线性性
 - 保厄米
 - 保迹性
-- 正性
-
-
+- 正定性
 
 ### 1.5.7 子系统的动力学演化: 主方程
 
@@ -161,13 +188,67 @@ $$
 
 ### 1.7.1 纠缠的定义和特性
 
+#### 定义
 
+- 纯态: 不能表示成两个或者多个子系统的直积形式; 对于两体, Schmidt分解项数大于1.
+- 混合态: 可分态和纠缠态.
+
+#### 特性
+
+**LOCC** 下纠缠不能增加.
+
+- **LO**: **L**ocal **O**peration, 包括局域的POVM和广义演化.
+
+- **CC**: **C**lassical **C**ommunication, 经典通讯.
 
 ### 1.7.2 纠缠的度量
 
+#### 两体复合系统的纠缠度量
 
+- 生成纠缠 (entanglement of formation)
 
-### 1.7.3 多体纠缠的判定和分类
+  通过 LOCC 过程, 制备目标状态所消耗的 Bell 基的平均最小数目.
+
+  Alice 和 Bob 先共享 Bell 基, 假设制备出$\rho_{AB}$, 若制备${\rho_{AB}}^{\otimes n}$需要 $k$ 个 Bell 基，则生成纠缠
+  $$
+  E_F=\lim_{n\rightarrow\infty}{\frac{k_{min}}n}
+  $$
+
+- 蒸馏纠缠(entanglement of distillation)
+
+  通过 LOCC 过程, 可以从目标纠缠态中提取的最大 Bell 基数目
+
+  若有 n 个 $\rho_{AB}$, 可以提取 $k'$ 个 Bell 基，则蒸馏纠缠
+  $$
+  E_D=\lim_{n\rightarrow\infty}{\frac{k'_{max}}n}
+  $$
+
+#### Concurrence
+
+译为并发度 or 共生.
+$$
+\begin{equation}
+\begin{gathered}
+\tilde\rho=(\sigma_y\otimes\sigma_y)\rho^*(\sigma_y\otimes\sigma_y)\\
+R=\sqrt{\sqrt\rho\tilde\rho\sqrt\rho},\,\mathrm{whose \,eigenvalue\,is\,}\lambda_1\ge\lambda_2\ge\lambda_3\ge\lambda_4\\
+C(\rho)=max\{0,\lambda_1-\lambda_2-\lambda_3-\lambda_4\}
+\end{gathered}
+\end{equation}
+$$
+生成纠缠: 
+$$
+E_F(\rho)=h\left( \frac{1+\sqrt{1-C(\rho)^2}}2 \right),
+$$
+
+其中 $h(x)=-x\log_2 x-(1-x)\log_2(1-x)$.
+
+#### 相对熵
+
+$$
+S(\sigma||\rho)=\mathrm{Tr}\left( \sigma(\log_2\sigma-\log_2\rho) \right).
+$$
+
+### 1.7.3 纠缠态的判定和分类
 
 #### Peres-Horodecki 判据
 
@@ -207,7 +288,10 @@ $$
 
 - Concavity
 
-  上凸
+  $$
+  S(\lambda_1\rho_1+\cdots+\lambda_n\rho_n)\ge\lambda_1S(\rho_1)+\cdots+\lambda_nS(\rho_n)
+  $$
+  其中 $\lambda_i>0, \sum{\lambda_i}=1$.
 
 - Entropy of measurement
   $$
@@ -219,7 +303,7 @@ $$
   $$
   H(X)\ge S(\rho),\,\mathrm{where}\, \rho=\sum_x{p_x\left|\varphi_x\right>\left<\varphi_x\right|}
   $$
-  当且仅当 $\{\left|\varphi_x\right>\}$ 为一组正交基.
+  当且仅当 $\{\left|\varphi_x\right>\}$ 为一组正交基时取等号.
 
 -  次加性
   $$
@@ -236,6 +320,19 @@ $$
   \left|S(\rho_A)-S(\rho_B)\right|\le S(\rho_{AB})\le S(\rho_A)+S(\rho_B)
   $$
   
+
+### 1.8.2 可提取信息与 Holevo 极限定理
+
+- Holevo信息
+  $$
+  \chi(\xi)=S(\rho)-\sum_x{p_xS(\rho_x)}
+  $$
+
+### 1.8.3 量子信源编码定理
+
+
+
+### 1.8.4 噪声信道的经典信息容量
 
 
 
