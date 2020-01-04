@@ -1,5 +1,7 @@
 # 量子计算
 
+<http://home.ustc.edu.cn/~mzh/public/IQI/QC.html>
+
 [TOC]
 
 ## 1 量子计算复杂度
