@@ -10,6 +10,13 @@ $$
 \newcommand{\measure}[1]{\left<#1\right>}
 \newcommand{\cases}[1]{\left\{\begin{matrix}#1\end{matrix}\right.}
 \newcommand{\cprob}[2]{\textrm{Prob}\left(#1|#2\right)}
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\Row}{\textrm{Row}}
+\newcommand{\Col}{\textrm{Col}}
+\newcommand{\Null}{\textrm{Null}}
+\newcommand{\dim}{\textrm{dim}}
+\newcommand{\rank}{\textrm{rank}}
+\newcommand{\det}{\textrm{det}}
 \begin{equation*}
 \end{equation*}
 $$
@@ -162,7 +169,39 @@ $$
 
 ### 10.2 经典编码理论
 
-线性码的奇偶检验矩阵和生成矩阵互为正交补空间
+**线性码:**
+
+用 $n$ 比特编码 $k$ 比特的线性码称作 $[n,k]$ 码.
+
+线性码有两种等价表示, 生成矩阵 $G$ 和奇偶检验矩阵 $H$.
+
+$G$ 为 $n\times k$ 矩阵, $H$ 为 $ (n-k)\times n$ 矩阵.
+
+给定 $G$ 和 $H$, 则列空间 $\Col(G)$ 和行空间 $\Row(H)$ 互为正交补空间, 相应的码字集合 $C$ 满足
+
+- $C=\set{Gx|x\in被编码信息}$
+- $C=\set{y|Hy=0}$, 即奇偶检验矩阵 $H$ 的零 (核) 空间 $\Null(H)$.
+
+**Hamming 距离**:
+
+- 码字的 Hamming 权重
+  $$
+  wt(x)=码字x中非零位数目
+  $$
+  
+- 码字之间的 Hamming 距离
+  $$
+  d(x,y)=wt(x+y)
+  $$
+  
+- 码字集合的 Hamming 距离
+  $$
+  d(C)=\min_{x,y\in C, x\ne y}d(x,y)=\min_{x\in C, x\neq0}wt(x)
+  $$
+  
+  QCQI[1] 练习 10.20 告诉我们, 奇偶校验矩阵 $H$ 所定义的码的 Hamming 距离等于 $\rank(H)+1$. 特别的, Hamming 码的距离为 3.
+
+**定理:** 
 
 ### 10.3 CSS 码
 
@@ -187,6 +226,10 @@ $$
 ### 10.7 容错量子计算
 
 ???
+
+---
+
+\[1\] Nielsen M A, Chuang I L. Quantum Computation and Quantum Information[M]. Cambridge university press, 2010.
 
 ---
 
