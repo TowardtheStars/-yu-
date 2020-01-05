@@ -70,20 +70,21 @@ $$
   H^{\bigotimes n}\otimes I:\qquad\ldots\rightarrow\sum_{y=0}^{2^n-1}\sum_{x=0}^{2^n-1}{\frac{(-1)^{f(x)}(-1)^{x\cdot y}\ket{y}}{2^n}}\otimes\frac{\ket0-\ket1}{\sqrt2}
   $$
   
-
 - Step4: 测量前n个比特
 
   - 对于常函数, 测得 $\ket y$ 态的概率幅为
     $$
     \sum_{x=0}^{2^n-1}{\frac{(-1)^{f(x)}(-1)^{x\cdot y}}{2^n}}=(-1)^{f(x)}\sum_{x=0}^{2^n-1}{\frac{(-1)^{x\cdot y}}{2^n}}=(-1)^{f(x)}\delta_{y,0}
     $$
-    故测量后以概率 1 坍缩到  $\ket 0^{\bigotimes n}$.
+    故测量后以概率 1 坍缩到  $\ket0$.
 
   - 对于平衡函数, 测得 $\ket0$ 态的概率幅为
     $$
     \sum_{x=0}^{2^n-1}{\frac{(-1)^{f(x)}}{2^n}}=0
     $$
-    故测量后以概率 0 坍缩到 $\ket 0^{\bigotimes n}$
+    故测量后以概率 0 坍缩到 $\ket0$.
+    
+    **注:** 此处的 $\ket0$ 是指 $\ket0^{\bigotimes n}$.
 
 ### 5.2 Grover 算法
 
