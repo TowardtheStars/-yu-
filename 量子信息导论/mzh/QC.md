@@ -177,17 +177,28 @@ $$
 
 线性码有两种等价表示, 生成矩阵 $G$ 和奇偶检验矩阵 $H$.
 
-$G$ 为 $n\times k$ 矩阵, $H$ 为 $ (n-k)\times n$ 矩阵.
+- $G$ 为 $n\times k$ 矩阵, $H$ 为 $ (n-k)\times n$ 矩阵.
 
-给定 $G$ 和 $H$, 则列空间 $\Col(G)$ 和行空间 $\Row(H)$($\Leftrightarrow\Col(H^T)$) 互为正交补空间, 即 $\Col(G)^\bot=\Row(H)$, 相应的码字集合 $C$ 满足
+- 给定 $G$ 和 $H$, 则列空间 $\Col(G)$ 和行空间 $\Row(H)$($\Leftrightarrow\Col(H^T)$) 互为正交补空间, 即 $\Col(G)^\bot=\Row(H)$.
 
-- $C=\set{Gx|x\in被编码信息}$
-- $C=\set{y|Hy=0}$, 即奇偶检验矩阵 $H$ 的零 (核) 空间 $\Null(H)$.
-
-奇偶检验矩阵可用于纠错
+- **标准**生成矩阵和**标准**奇偶检验矩阵满足
 $$
-Hy'=H(y+e_i)=He_i
-$$
+  G=\begin{bmatrix}I_k\\A\end{bmatrix}
+  \qquad 
+  H= \begin{bmatrix}-A & I_{n-k}\end{bmatrix}
+  $$
+  其中 $A$ 为 $k\times(n-k)$ 矩阵.
+  
+- 码字集合 $C$ 满足
+  - $C=\set{Gx|x\in被编码信息}$.
+  - $C=\set{y|Hy=0}$, 即奇偶检验矩阵 $H$ 的零 (核) 空间 $\Null(H)$.
+
+- 奇偶检验矩阵可用于纠错
+  $$
+  Hy'=H(y+e_i)=He_i
+  $$
+
+
 
 #### Hamming 距离
 
@@ -244,9 +255,9 @@ $$
 
 1. bit-flip 纠错
    $$
-   C^{\bigotimes n}(H_1):\qquad \ldots\to \frac1{\sqrt{\abs{C_2}}}\sum_{y\in C_2}{(-1)^{(x+y)\cdot e_2}\ket{x+y+e_1}}\otimes\ket{H_1e_1}
+   U_{f_{H_1}}:\qquad \ldots\to \frac1{\sqrt{\abs{C_2}}}\sum_{y\in C_2}{(-1)^{(x+y)\cdot e_2}\ket{x+y+e_1}}\otimes\ket{H_1e_1}
    $$
-   测量辅助比特即可纠正相应 t 比特错误, 得到
+   测量辅助比特即可纠正相应 t 比特错误, 丢弃辅助比特后得到
    $$
     \frac1{\sqrt{\abs{C_2}}}\sum_{y\in C_2}{(-1)^{(x+y)\cdot e_2}\ket{x+y}}
    $$
@@ -259,13 +270,13 @@ $$
    $$
    令 $z'\equiv z+e_2$, 则可重写为
    $$
-   \frac1{\sqrt{\abs{C_2}2^n}}\sum_z\sum_{y\in C_2}{(-1)^{(x+y)\cdot z'}\ket{z'+e_2}}
+   \frac1{\sqrt{\abs{C_2}2^n}}\sum_{z'}\sum_{y\in C_2}{(-1)^{(x+y)\cdot z'}\ket{z'+e_2}}
    $$
    当前仅当 $z'\in C_2^\bot$ 时, $\sum_{y\in C_2}(-1)^{y\cdot z'}$ 有非零值 $\abs{C_2}$, 可重写为
    $$
    \frac1{\sqrt{2^n/\abs{C_2}}}\sum_{z'\in C_2^\bot}{(-1)^{x\cdot z'}\ket{z'+e_2}}
    $$
-   使用类似 bit-flip 的方式, 引入辅助比特, 应用 $C^{\bigotimes n}(H_2)$ 后纠错, 得到
+   使用类似 bit-flip 的方式, 引入辅助比特, 应用 $U_{f_{H_2}}:$ 后纠错, 得到
    $$
    \frac1{\sqrt{2^n/\abs{C_2}}}\sum_{z'\in C_2^\bot}{(-1)^{x\cdot z'}\ket{z'}}
    $$
@@ -273,13 +284,40 @@ $$
    $$
    \begin{equation}
    \begin{aligned}
-   H^{\bigotimes n}:\qquad\ldots&\to\frac1{2^n/\sqrt{\abs{C_2}}}\sum_y\sum_{z'\in C_2^\bot}{(-1)^{(x+y)\cdot z'}\ket{y}}\\
-   &\to\frac1{\sqrt{\abs{C_2}}}\sum_{y\in C_2}{\ket{x+y}}
+   H^{\bigotimes n}:\qquad\ldots&\to\frac1{2^n/\sqrt{\abs{C_2}}}\sum_{y’}\sum_{z'\in C_2^\bot}{(-1)^{(x+y‘)\cdot z'}\ket{y’}}\\
+   &\underrightarrow{y\equiv y'+x}\quad \frac1{2^n/\sqrt{\abs{C_2}}}\sum_{y}\sum_{z'\in C_2^\bot}{(-1)^{y\cdot z'}\ket{x+y}}\\
+   &\to \frac1{\sqrt{\abs{C_2}}}\sum_{y\in C_2}{\ket{x+y}}
    \end{aligned}
    \end{equation}
    $$
 
 #### 实例: Steane 码
+
+
+
+使用 $[7,4,3]$ Hamming 码 $C$ 构造, 并令 $C_1\equiv C$ 且 $C_2\equiv C^\bot$.
+
+则 $C_1$ 的生成矩阵和奇偶检验矩阵为
+$$
+G[C_1]=
+\begin{bmatrix}
+1&0&0&0\\
+0&1&0&0\\
+0&0&1&0\\
+0&0&0&1\\
+0&1&1&1\\
+1&0&1&1\\
+1&1&0&1\\
+\end{bmatrix}
+\qquad 
+H[C_1]=
+\begin{bmatrix}
+0&0&0&1&1&1&1\\
+0&1&1&0&0&1&1\\
+1&0&1&0&1&0&1\\
+\end{bmatrix}
+$$
+
 
 
 
