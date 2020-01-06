@@ -187,7 +187,7 @@ $$
   \qquad 
   H= \begin{bmatrix}-A & I_{n-k}\end{bmatrix}
   $$
-  其中 $A$ 为 $k\times(n-k)$ 矩阵.
+  其中 $A$ 为 $(n-k)\times k$ 矩阵.
   
 - 码字集合 $C$ 满足
   - $C=\set{Gx|x\in被编码信息}$.
@@ -293,11 +293,9 @@ $$
 
 #### 实例: Steane 码
 
-
-
 使用 $[7,4,3]$ Hamming 码 $C$ 构造, 并令 $C_1\equiv C$ 且 $C_2\equiv C^\bot$.
 
-则 $C_1$ 的生成矩阵和奇偶检验矩阵为
+则 $C_1$ 的**标准**生成矩阵和**标准**奇偶检验矩阵为
 $$
 G[C_1]=
 \begin{bmatrix}
@@ -312,18 +310,74 @@ G[C_1]=
 \qquad 
 H[C_1]=
 \begin{bmatrix}
-0&0&0&1&1&1&1\\
-0&1&1&0&0&1&1\\
-1&0&1&0&1&0&1\\
+3&5&6&7&4&2&1\\
+\hline
+0&1&1&1&1&0&0\\
+1&0&1&1&0&1&0\\
+1&1&0&1&0&0&1\\
 \end{bmatrix}
 $$
 
+于是 $C_2$ 的生成矩阵为
+$$
+G[C_2]=H(C_1)^T=
+\begin{bmatrix}
+0&1&1\\
+1&0&1\\
+1&1&0\\
+1&1&1\\
+1&0&0\\
+0&1&0\\
+0&0&1\\
+\end{bmatrix}
+$$
+我不会证 $C_2 \subset C_1$, 不过暴算 16 项就能验证. 总之生成出来的 $CSS(C_1,C_2)$ 即为 Steane 码, 是 $[7,1]$ 码.
 
-
-
+于是得到 Steane 码的逻辑 $\ket{0_L}$ 元
+$$
+\begin{equation}
+\ket{0_L}=\ket{0+C_2}=\frac1{2\sqrt{2}}
+\left(
+\ket{0000000}+
+\ket{1101001}+
+\ket{1011010}+
+\ket{0110011}+\\
+\ket{0111100}+
+\ket{1010101}+
+\ket{1100110}+
+\ket{0001111}
+\right)
+\end{equation}
+$$
+Steane 码共两种状态, 由于逻辑 $\ket{0_L}$ 元使用 $0\in C_2$ 生成, 故逻辑 $\ket{1_L}$ 只需 $\forall x,x\in C_1\and x\notin C_2$ 来生成, 不妨取 $x=[1,1,1,1,1,1,1]^T$, 于是得到
+$$
+\begin{equation}
+\ket{1_L}=\ket{1111111+C_2}=\frac1{2\sqrt{2}}
+\left(
+\ket{1111111}+
+\ket{0010110}+
+\ket{0100101}+
+\ket{1001100}+\\
+\ket{1000011}+
+\ket{0101010}+
+\ket{0011001}+
+\ket{1110000}
+\right)
+\end{equation}
+$$
 
 
 ### 10.4 稳定子码 (stabilizer code)
+
+#### 稳定子体系
+
+以 $\ket{\Phi^+}=\frac1{\sqrt2}(\ket{00}+\ket{11})$ 为例, 显然满足
+$$
+X_1X_2\ket{\Phi^+}=\ket{\Phi^+}\qquad Z_1Z_2\ket{\Phi^+}=\ket{\Phi^+}
+$$
+于是我们说状态 $\ket{\Phi^+}$ 是由算子 $X_1X_2$ 和 $Z_1Z_2$ 稳定的唯一量子态 (忽略全局相位).
+
+
 
 
 
