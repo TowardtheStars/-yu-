@@ -186,12 +186,12 @@ $$
   G=\begin{bmatrix}I_k\\A\end{bmatrix}
   \qquad 
   H= \begin{bmatrix}-A & I_{n-k}\end{bmatrix}
-  $$
+$$
   其中 $A$ 为 $(n-k)\times k$ 矩阵.
-  
+
 - 码字集合 $C$ 满足
-  - $C=\set{Gx|x\in被编码信息}$.
-  - $C=\set{y|Hy=0}$, 即奇偶检验矩阵 $H$ 的零 (核) 空间 $\Null(H)$.
+  - $C=\set{Gx:x\in被编码信息}$.
+  - $C=\set{y:Hy=0}$, 即奇偶检验矩阵 $H$ 的零 (核) 空间 $\Null(H)$.
 
 - 奇偶检验矩阵可用于纠错
   $$
@@ -276,7 +276,7 @@ $$
    $$
    \frac1{\sqrt{2^n/\abs{C_2}}}\sum_{z'\in C_2^\bot}{(-1)^{x\cdot z'}\ket{z'+e_2}}
    $$
-   使用类似 bit-flip 的方式, 引入辅助比特, 应用 $U_{f_{H_2}}:$ 后纠错, 得到
+   使用类似 bit-flip 的方式, 引入辅助比特, 应用 $U_{f_{H_2}}$ 后纠错, 得到
    $$
    \frac1{\sqrt{2^n/\abs{C_2}}}\sum_{z'\in C_2^\bot}{(-1)^{x\cdot z'}\ket{z'}}
    $$
@@ -295,7 +295,7 @@ $$
 
 使用 $[7,4,3]$ Hamming 码 $C$ 构造, 并令 $C_1\equiv C$ 且 $C_2\equiv C^\bot$.
 
-则 $C_1$ 的**标准**生成矩阵和**标准**奇偶检验矩阵为
+则 $C_1$ 的生成矩阵和奇偶检验矩阵为
 $$
 G[C_1]=
 \begin{bmatrix}
@@ -310,11 +310,9 @@ G[C_1]=
 \qquad 
 H[C_1]=
 \begin{bmatrix}
-3&5&6&7&4&2&1\\
-\hline
-0&1&1&1&1&0&0\\
-1&0&1&1&0&1&0\\
-1&1&0&1&0&0&1\\
+0&0&0&1&1&1&1\\
+0&1&1&0&0&1&1\\
+1&0&1&0&1&0&1\\
 \end{bmatrix}
 $$
 
@@ -322,13 +320,13 @@ $$
 $$
 G[C_2]=H(C_1)^T=
 \begin{bmatrix}
+0&0&1\\
+0&1&0\\
 0&1&1\\
+1&0&0\\
 1&0&1\\
 1&1&0\\
 1&1&1\\
-1&0&0\\
-0&1&0\\
-0&0&1\\
 \end{bmatrix}
 $$
 我不会证 $C_2 \subset C_1$, 不过暴算 16 项就能验证. 总之生成出来的 $CSS(C_1,C_2)$ 即为 Steane 码, 是 $[7,1]$ 码.
@@ -339,13 +337,14 @@ $$
 \ket{0_L}=\ket{0+C_2}=\frac1{2\sqrt{2}}
 \left(
 \ket{0000000}+
-\ket{1101001}+
-\ket{1011010}+
-\ket{0110011}+\\
-\ket{0111100}+
 \ket{1010101}+
+\ket{0110011}+
 \ket{1100110}+
-\ket{0001111}
+\\
+\ket{0001111}+
+\ket{1011010}+
+\ket{0111100}+
+\ket{1101001}
 \right)
 \end{equation}
 $$
@@ -355,13 +354,14 @@ $$
 \ket{1_L}=\ket{1111111+C_2}=\frac1{2\sqrt{2}}
 \left(
 \ket{1111111}+
-\ket{0010110}+
-\ket{0100101}+
-\ket{1001100}+\\
-\ket{1000011}+
 \ket{0101010}+
+\ket{1001100}+
 \ket{0011001}+
-\ket{1110000}
+\\
+\ket{1110000}+
+\ket{0100101}+
+\ket{1000011}+
+\ket{0010110}
 \right)
 \end{equation}
 $$
@@ -369,7 +369,7 @@ $$
 
 ### 10.4 稳定子码 (stabilizer code)
 
-#### 稳定子体系
+#### 稳定子体系	
 
 以 $\ket{\Phi^+}=\frac1{\sqrt2}(\ket{00}+\ket{11})$ 为例, 显然满足
 $$
@@ -377,8 +377,65 @@ X_1X_2\ket{\Phi^+}=\ket{\Phi^+}\qquad Z_1Z_2\ket{\Phi^+}=\ket{\Phi^+}
 $$
 于是我们说状态 $\ket{\Phi^+}$ 是由算子 $X_1X_2$ 和 $Z_1Z_2$ 稳定的唯一量子态 (忽略全局相位).
 
+***定义*** 设 $S$ 为 Pauli 群 $G_n$ 的子群, 定义
+$$
+V_S\equiv\set{\ket\psi:\ket\psi \text{ is stablized by } s, s\in S}
+$$
+则称 $V_S$ 为由 $S$ 稳定的向量空间, $S$ 为空间 $V_S$ 的稳定子.
 
+稳定子 $S$ 构成 Pauli群的一个子群, 可由生成元描述 $S=\left<g_1, g_2,\ldots,g_t\right>$.
 
+#### 酉门和稳定子体系
+
+对于 $\forall \ket\psi\in V_S$ 和 $\forall g\in S$, 有
+$$
+U\ket\psi=Ug\ket\psi=UgU^\dagger U\ket\psi
+$$
+所以 $U\ket\psi$ 由 $UgU^\dagger$ 稳定, 从而向量空间 $UV_S$ 由 $USU^\dagger\equiv\set{UgU^\dagger:g\in S}$ 稳定.
+
+#### Shor 码的稳定子生成元
+
+Shor 码的稳定子生成元如下
+$$
+\begin{array}{|c|ccccccc|}
+\hline 
+生成元&&&&算&&子&&&\\
+\hline 
+g_1&Z&Z&I&I&I&I&I&I&I\\
+g_2&I&Z&Z&I&I&I&I&I&I\\
+g_3&I&I&I&Z&Z&I&I&I&I\\
+g_4&I&I&I&I&Z&Z&I&I&I\\
+g_5&I&I&I&I&I&I&Z&Z&I\\
+g_6&I&I&I&I&I&I&I&Z&Z\\
+g_7&X&X&X&X&X&X&I&I&I\\
+g_8&I&I&I&X&X&X&X&X&X\\
+\hline
+\end{array}
+$$
+编码后 $X_L=Z_1Z_2\ldots Z_9$, $Z_L=X_1X_2\ldots X_9$.
+
+#### Steane 码的稳定子生成元
+
+Steane 码的稳定子生成元如下
+$$
+\begin{array}{|c|ccccccc|}
+\hline 
+生成元&&&算&&子&&\\
+\hline 
+g_1&I&I&I&X&X&X&X\\
+g_2&I&X&X&I&I&X&X\\
+g_3&X&I&X&I&X&I&X\\
+\hdashline 
+g_4&I&I&I&Z&Z&Z&Z\\
+g_5&I&Z&Z&I&I&Z&Z\\
+g_6&Z&I&Z&I&Z&I&Z\\
+\hline
+\end{array}
+$$
+
+注意到它有和奇偶检验矩阵类似的形式.
+
+编码后 $X_L=X_1X_2\ldots X_7$, $Z_L=Z_1Z_2\ldots Z_7$.
 
 
 ### 10.5 环形码 (toric code)
