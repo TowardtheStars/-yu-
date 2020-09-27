@@ -13,8 +13,3 @@ $$
 \newcommand{\cprob}[2]{\textrm{Prob}\left(#1|#2\right)}
 \end{align*}
 $$
-
-# HW1
-
-[TOC]
-
