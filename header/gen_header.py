@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import sys, os, re
-header_file = open('header.txt', encoding='utf-8')
+header_file = open('header', encoding='utf-8')
 header = header_file.read()
 header_file.close()
 
