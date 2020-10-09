@@ -1,3 +1,19 @@
+$$
+\begin{align*}
+\newcommand{\ket}[1]{\left|{#1}\right>}
+\newcommand{\bra}[1]{\left<{#1}\right|}
+\newcommand{\braket}[2]{\left<{#1}|{#2}\right>}
+\newcommand{\ketbra}[2]{\left|{#1}\right>\left<#2\right|}
+\newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\difrac}[2]{\frac{\textrm{d}{#1}}{\textrm{d}{#2}}}
+\newcommand{\Tr}{\textrm{Tr}}
+\newcommand{\T}{\textrm{T}}
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\measure}[1]{\left<#1\right>}
+\newcommand{\cases}[1]{\begin{cases}#1\end{cases}}
+\newcommand{\cprob}[2]{\textrm{Prob}\left(#1|#2\right)}
+\end{align*}
+$$
 # 1 量子信息和量子计算基础
 
 [TOC]
@@ -20,9 +36,9 @@
 - 孤立系统
 
   - Schrodinger 方程
-    $$
+$$
     i\hbar\partial_t\left|\varphi\right>=\hat H\left|\varphi\right>
-    $$
+$$
 
   - 幺正演化
 
@@ -58,6 +74,27 @@
 
 
 ### 1.4.3 Schmidt 分解定理
+
+与奇异值分解定理的联系
+$$
+\begin{equation}
+\begin{aligned}
+\ket{\psi}_{AB}=\sum_{mn}a_{mn}\ket{m}_A\ket{n}_B 
+&\longrightarrow \sum_{mn}a_{mn}\ketbra mn\\
+&=\sum_{mn}\sum_iU_{mi}D_{ii}V_{in}\ketbra mn\\
+&=\sum_i
+D_{ii}
+\left(
+	\sum_m U_{mi}\ket m
+\right)
+\left(
+	\sum_n V_{in} \bra n
+\right)\\
+&\longrightarrow \sum_i D_{ii}\ket{i}_A\ket{i'}_B
+
+\end{aligned}
+\end{equation}
+$$
 
 
 
