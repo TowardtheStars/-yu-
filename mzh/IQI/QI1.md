@@ -141,7 +141,7 @@ $$
   $$
   坍缩为
   $$
-  \rho_{out}'=\frac{P_n\rho P_n}{Tr(P_n\rho)}.
+  \rho_{out}'(n)=\frac{P_n\rho P_n}{Tr(P_n\rho)}.
   $$
   表示为混合态系综形式
   $$
@@ -195,12 +195,25 @@ $$
   其中 $M_\mu=\left<\mu|_BU_{AB}|0\right>_B$.
   
 - 给定一个算符和表示，可以创造一个相应的幺正表示.
+  $$
+  U_{AB}:\ket\varphi_A\otimes\ket0_B\rightarrow\sum_\mu{M_\mu\ket\varphi_A\otimes\ket\mu_B}
+  $$
+  其中 $\ket \mu_B$ 为 $\mathcal H_B$ 中的一组正交基. 容易验证 $U_{AB}$ 是幺正算符.
 
 - 给定一个超算符后，其算符和表示不唯一
   $$
   $(\rho_A)=\sum_\mu{M_\mu\rho_A M_\mu^\dagger}=\sum_\nu{N_\nu\rho_A N_\nu^\dagger},
   $$
-  其中 $N_\nu=U_{\nu\mu}M_\mu$.
+  不同表示之间相差 $\mathcal H_A$ 上的幺正变换 $U'$
+  $$
+  \begin{align}
+  N_\nu=\sideset{_B}{_B}{\left<\nu|U_{AB}|0\right>}=\sum_\mu \sideset{_B}{_B}{\left<\mu|U'^*_{\mu\nu}U_{AB}|0\right>}=\sum_{\mu}M_\mu U'^*_{\mu\nu}\\
+  N_\nu^\dagger=\sideset{_B}{_B}{\left<0|U_{AB}|\nu\right>}=\sum_\mu \sideset{_B}{_B}{\left<0|U_{AB}U'_{\nu\mu}|\mu\right>}=\sum_{\mu}U'_{\nu\mu}M_\mu^\dagger
+  \end{align}
+  $$
+  
+  
+- 
 
 ### 1.5.6 Kraus表示理论
 
