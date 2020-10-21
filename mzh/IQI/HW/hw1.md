@@ -13,9 +13,9 @@ $$
 \newcommand{\measure}[1]{\left<#1\right>}
 \newcommand{\cases}[1]{\begin{cases}#1\end{cases}}
 \newcommand{\cprob}[2]{\textrm{Prob}\left(#1|#2\right)}
+\newcommand{\prob}[1]{\textrm{Prob}\left(#1\right)}
 \end{align*}
 $$
-
 
 # 第一次作业
 
