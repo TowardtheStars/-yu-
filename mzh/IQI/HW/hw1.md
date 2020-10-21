@@ -8,12 +8,14 @@ $$
 \newcommand{\difrac}[2]{\frac{\textrm{d}{#1}}{\textrm{d}{#2}}}
 \newcommand{\Tr}{\textrm{Tr}}
 \newcommand{\T}{\textrm{T}}
+\newcommand{\H}{\mathcal{H}}
 \newcommand{\abs}[1]{\left|#1\right|}
 \newcommand{\measure}[1]{\left<#1\right>}
 \newcommand{\cases}[1]{\begin{cases}#1\end{cases}}
 \newcommand{\cprob}[2]{\textrm{Prob}\left(#1|#2\right)}
 \end{align*}
 $$
+
 
 # 第一次作业
 
