@@ -17,7 +17,7 @@ else:
         if match:
             s = s.replace(match.group(), header, 1) # 替换一次
         else:
-            s = header + s
+            s = header + '\n' + s
 
         file.close()
         file = open(path, 'w', encoding='utf-8')
