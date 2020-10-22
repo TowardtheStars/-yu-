@@ -144,8 +144,8 @@ $$
 
 $$
 \begin{cases}
-\ket{\psi_i}=\sum_kA_{ik}\ket{k},& \braket ij=\delta_{ij}\\
-\ket{\widetilde \psi_i}=\sum_kA_{ik}\ket{\widetilde k},& \braket{\widetilde i}{\widetilde j}=\delta_{ij}
+\ket{\psi_i}=\sum_kA_{ki}\ket{k},& \braket ij=\delta_{ij}\\
+\ket{\widetilde \psi_i}=\sum_kA_{ki}\ket{\widetilde k},& \braket{\widetilde i}{\widetilde j}=\delta_{ij}
 \end{cases}
 $$
 
@@ -153,7 +153,7 @@ $$
 
 此时有
 $$
-U\ket{\psi_i}=U\sum_kA_{ik}\ket{k}=\sum_kA_{ik}U\ket{k}=\sum_kA_{ik}\ket{\widetilde k}=\ket{\widetilde \psi_i}
+U\ket{\psi_i}=U\sum_kA_{ki}\ket{k}=\sum_kA_{ki}U\ket{k}=\sum_kA_{ki}\ket{\widetilde k}=\ket{\widetilde \psi_i}
 $$
 至此, 我们已经构造出了满足条件的酉变换 $U$.
 
@@ -236,24 +236,185 @@ $$
 $$
 
 
-### 5. 对三粒子系统纯态$\ket{\varphi_{ABC}}$，在空间 $\H_A\otimes\H_B\otimes\H_C$ 中是否存在 $\H_A$, $\H_B$, $\H_C$ 中的正交基 $\left\{\ket{i_A}\right\}$, $\left\{\ket{i_B}\right\}$, $\left\{\ket{i_C}\right\}$, 使得 $\ket{\varphi_{ABC}}=\sum_I{\sqrt{p_i}\ket{i_A}\otimes\ket{i_B}\otimes\ket{i_C}}$ 一定成立? 给出理由.
+
+### 5. 对三粒子系统纯态 $\ket{\phi}_{ABC}$，在空间 $\H_A\otimes\H_B\otimes\H_C$ 中是否存在 $\H_A$, $\H_B$, $\H_C$ 中的正交基 $\left\{\ket{i_A}\right\}$, $\left\{\ket{i_B}\right\}$, $\left\{\ket{i_C}\right\}$, 使得 $\ket{\phi}_{ABC}=\sum_i{\sqrt{p_i}\ket{i_A}\otimes\ket{i_B}\otimes\ket{i_C}}$ 一定成立? 给出理由.
+
+不一定成立. 下用反证法证之.
+
+**证明**:
+
+假设原命题成立, 即 $\ket{\phi}_{ABC}=\sum_i{\sqrt{p_i}\ket{i_A}\otimes\ket{i_B}\otimes\ket{i_C}}$.
+
+则有密度矩阵形式
+$$
+\rho_{ABC}=\ket\phi_{ABC}\bra\phi=\sum_{ij}{
+	\sqrt{p_ip_j}\cdot\ket i_A\bra j\otimes\ket i_B\bra j\otimes\ket i_C\bra j
+}
+$$
+对 $\H_B$, $\H_C$ 求部分迹得
+$$
+\begin{equation}
+\begin{aligned}
+\rho_A
+&=\Tr\left(\rho_{ABC}\right)\\
+&=\sum_{kl}{
+	\sideset{_C}{_C}{\bra l\sideset{_B}{_B}{\bra k\rho_{ABC}\ket k}\ket l}
+}\\
+
+&=\sum_{ijkl}\sqrt{p_ip_j}\cdot\ket i_A\bra j\cdot\delta_{ki}\delta_{jk}\delta_{li}\delta_{jl}\\
+&=\sum_i{p_i\ket i_A\bra i}
+\end{aligned}
+\end{equation}
+$$
+同理可得
+$$
+\begin{align}
+\rho_B&=\sum_i{p_i\ket i_B\bra i}\\
+\rho_C&=\sum_i{p_i\ket i_C\bra i}\\
+\end{align}
+$$
+从而 $\rho_A$, $\rho_B$, $\rho_C$ 具有相同的本征值.
+
+然而, 事实上 $\rho_A$, $\rho_B$, $\rho_C$ 可以有不同的本征值, 下面给出反例
+
+考虑两能级系统, 令 $\ket\phi_{ABC}=\frac1{\sqrt2}\left(\ket{000}_{ABC}+\ket{010}_{ABC}\right)$, 则有
+$$
+\begin{equation*}
+\rho_{AB}
+=\sideset{_C}{_C}{\bra0\rho_{ABC}\ket0}
++\sideset{_C}{_C}{\bra1\rho_{ABC}\ket1}
+=\frac12\left(
+	\ket{00}_{AB}\bra{00}+\ket{01}_{AB}\bra{01}
+\right)\\
+\rho_{A}
+=\sideset{_B}{_B}{\bra0\rho_{AB}\ket0}
++\sideset{_B}{_B}{\bra1\rho_{AB}\ket1}
+=\ket{0}_{A}\bra{0}\\
+\rho_{B}
+=\sideset{_A}{_A}{\bra0\rho_{AB}\ket0}
++\sideset{_A}{_A}{\bra1\rho_{AB}\ket1}
+=\frac12\left(
+	\ket{0}_{B}\bra{0}+\ket{1}_{B}\bra{1}
+\right)\\
+\end{equation*}
+$$
+此时 $\rho_A$, $\rho_B$ 有着不同的本征值.
+
+故假设不成立, 得证.
 
 
 
 ### 6. 设 $\ket\psi$ 为量子比特态，在 *Bloch* 球面上均匀随机分布. 
 
-#### (i) 随机地猜想一个态 $\ket\varphi$，求猜测态相对于 $\ket\psi$ 的平均保真度 $\bar F=<\abs{\braket\varphi\psi}^2>$.
+#### (i) 随机地猜想一个态 $\ket\phi$，求猜测态相对于 $\ket\psi$ 的平均保真度 $\bar F=<\abs{\braket\phi\psi}^2>$.
+
+不妨设 $\psi=\ket0$, 而 $\ket\phi$ 为 *Bloch* 球面上的任意态
+$$
+\ket\phi=\ket{\phi(\theta,\varphi)}=\cos\frac\theta2\ket0+e^{\mathrm i\varphi}\sin\frac\theta2\ket1
+$$
+则平均保真度
+$$
+\begin{align*}
+\bar F&=<\abs{\braket\phi\psi}^2>=<\cos^2\frac\theta2>\\
+&=\frac1{4\pi}\int_0^{2\pi}\mathrm{d}\varphi\int_0^\pi{
+	\cos^2\frac\theta2\sin\theta\mathrm{d}\theta
+}\\
+&=-\frac12\int_0^\pi{
+	\frac{1+\cos\theta}2\mathrm d\cos\theta
+}\\
+&=-\frac12\int_0^\pi{
+	\mathrm d\left(\frac{\cos\theta}2+\frac{\cos^2\theta}4\right)
+}\\
+&=\frac12
+\end{align*}
+$$
+
 
 #### (ii) 对此量子态做正交测量 $\left\{P_\uparrow,P_\downarrow\right\}$, 其中 $P_\uparrow+P_\downarrow=I$. 测量后系统被制备到: $\rho$, 求 $\rho$ 与原来的态 $\ket\psi$ 的平均保真度 $\bar F=<\bra\psi\rho\ket\psi>$.
 
+以 $\ket\uparrow$, $\ket\downarrow$ 为基, 将 $\ket\psi$ 表示为
 $$
-\frac1{4\pi}\int_0^{2\pi}\mathrm{d}\varphi\int_0^\pi \sin\theta\mathrm{d}\theta=1
+\ket\psi=\cos\frac\theta2\ket\uparrow+e^{\mathrm i\varphi}\sin\frac\theta2\ket\downarrow
+$$
+测量后的 $\rho$ 表示成混合态系综的形式
+$$
+\rho=\bra\psi P_\uparrow\ket\psi\cdot P_\uparrow+\bra\psi P_\downarrow\ket\psi\cdot P_\downarrow=\cos^2\frac\theta2P_\uparrow+\sin^2\frac\theta2P_\downarrow
+$$
+于是
+$$
+\bra\psi\rho\ket\psi=\cos^4\frac\theta2+\sin^4\frac\theta2
+$$
+从而
+$$
+\begin{align*}
+\bar F&=<\cos^4\frac\theta2+\sin^4\frac\theta2>\\
+&=\frac1{4\pi}\int_0^{2\pi}\mathrm{d}\varphi\int_0^\pi{
+	\left(\cos^4\frac\theta2+\sin^4\frac\theta2\right)\sin\theta\mathrm{d}\theta
+}\\
+&=-\frac12\int_0^\pi{
+	\left[
+		\left(\frac{1+\cos\theta}2\right)^2 + \left(\frac{1-\cos\theta}2\right)^2
+	\right]
+	\mathrm d\cos\theta
+}\\
+
+&=-\frac14\int_0^\pi{
+	\left(
+		1+\cos^2\theta
+	\right)
+	\mathrm d\cos\theta
+}\\
+
+&=-\frac14\int_0^\pi{
+	\mathrm d\left(
+		\cos\theta+\frac{\cos^3\theta}3
+	\right)
+}\\
+&=\frac23
+\end{align*}
 $$
 
 
+### 7. $\ket{\psi_1}=\ket0$, $\ket{\psi_2}=-\frac12\ket0+\frac{\sqrt3}2\ket1$, $\ket{\psi_3}=-\frac12\ket0-\frac{\sqrt3}2\ket1$. 现令 $F_a=\frac23\ketbra{\psi_a}{\psi_a}$，则 $\left\{F_a\right\}_{a=1,2,3}$ 构成二维空间中的 *POVM*. 现引入一个辅助的 *qubit*, 试在扩展空间中实施一个正交测量, 从而实现此 *POVM*.
 
-### 7. $\ket{\psi_1}=\ket0$, $\ket{\psi_2}=-\frac12\ket0+\frac{\sqrt3}2\ket1$, $\ket{\psi_3}=-\frac12\ket0-\frac{\sqrt3}2\ket1$. 现令 $F_i=\frac23\ketbra{\psi_i}{\psi_i}$，则 $\left\{F_a\right\}_{a=1,2,3}$ 构成二维空间中的 *POVM*. 现引入一个辅助的 *qubit*, 试在扩展空间中实施一个正交测量, 从而实现此 *POVM*.
+已知 $F_a=\frac23\ketbra{\psi_a}{\psi_a}=\ketbra{\widetilde\psi_a}{\widetilde\psi_a}$, 故 $\ket{\widetilde\psi_a}=\sqrt{\frac23}\ket{\psi_a}$.
+
+于是有
+$$
+\pmatrix{\ket{\widetilde\psi_1}&\ket{\widetilde\psi_2}&\ket{\widetilde\psi_3}}
+=\pmatrix{
+\sqrt\frac23	&	-\sqrt\frac16	&	-\sqrt\frac16\\
+0				&	\sqrt\frac12	&	-\sqrt\frac12
+}
+$$
+共三个测量算符, 故做直和扩展到三维空间, $\ket{u_a}=\ket{\widetilde\psi_a}+\ket{\widetilde\psi_a^\perp}$. 
+
+现在只需找到一个与 $\pmatrix{\ket{\widetilde\psi_1}&\ket{\widetilde\psi_2}&\ket{\widetilde\psi_3}}$ 中的行向量均正交的向量, 易得 $\sqrt\frac13(1,1,1)$ 满足条件. 于是我们得到
+$$
+\pmatrix{\ket{u_1}&\ket{u_2}&\ket{u_3}}
+=\pmatrix{
+\sqrt\frac23	&	-\sqrt\frac16	&	-\sqrt\frac16\\
+0				&	\sqrt\frac12	&	-\sqrt\frac12\\
+\sqrt\frac13	&	\sqrt\frac13	&	\sqrt\frac13
+}
+$$
+现在再引入一个辅助 *qubit* 做直积扩展,  $\ket{\Phi_a}=\ket{0}\ket{\widetilde \psi_a}+\ket{1}\ket{\widetilde\psi_{1a}^\perp}$, 此时为 4 维空间, 需要引入额外的正交向量.
+
+于是我们有
+$$
+\pmatrix{\ket{\Phi_1}&\ket{\Phi_2}&\ket{\Phi_3}&\ket{\Phi_4}}
+=\pmatrix{
+\sqrt\frac23	&	-\sqrt\frac16	&	-\sqrt\frac16	&	0\\
+0				&	\sqrt\frac12	&	-\sqrt\frac12	&	0\\
+\sqrt\frac13	&	\sqrt\frac13	&	\sqrt\frac13	&	0\\
+0				&	0				&	0				&	1\\
+}
+$$
+令 $E_a=\ketbra{\Phi_a}{\Phi_a}$, 则 $\left\{E_a\right\}_{a=1,2,3,4}$ 在题设扩展空间中实现了此 POVM.
 
 
 
 ### 8\*. 证明超算符仅在幺正条件下才是可逆的.
+
+**证明**:
+

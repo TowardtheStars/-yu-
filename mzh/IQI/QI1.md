@@ -204,16 +204,13 @@ $$
   $$
   $(\rho_A)=\sum_\mu{M_\mu\rho_A M_\mu^\dagger}=\sum_\nu{N_\nu\rho_A N_\nu^\dagger},
   $$
-  不同表示之间相差 $\mathcal H_A$ 上的幺正变换 $U'$
+  不同表示之间相差一个系数 $U'_{\nu\mu}$ ( $U'$ 是酉的)
   $$
   \begin{align}
-  N_\nu=\sideset{_B}{_B}{\left<\nu|U_{AB}|0\right>}=\sum_\mu \sideset{_B}{_B}{\left<\mu|U'^*_{\mu\nu}U_{AB}|0\right>}=\sum_{\mu}M_\mu U'^*_{\mu\nu}\\
-  N_\nu^\dagger=\sideset{_B}{_B}{\left<0|U_{AB}|\nu\right>}=\sum_\mu \sideset{_B}{_B}{\left<0|U_{AB}U'_{\nu\mu}|\mu\right>}=\sum_{\mu}U'_{\nu\mu}M_\mu^\dagger
+  N_\nu=\sideset{_B}{_B}{\left<\nu|U_{AB}|0\right>}=\sum_\mu U'_{\nu\mu}\sideset{_B}{_B}{\left<\mu|U_{AB}|0\right>}=\sum_{\mu}U'_{\nu\mu}M_\mu \\
   \end{align}
   $$
   
-
-
 
 ### 1.5.6 Kraus表示理论
 
