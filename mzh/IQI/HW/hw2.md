@@ -126,63 +126,34 @@ $$
 
 ### 3. 空间 $\H$ 中存在两组归一化态$\left\{\ket{\psi_i}\right\}$、 $\left\{\ket{\widetilde\psi_i}\right\}$, 它们满足 $\forall i,j,\braket{\psi_i}{\psi_j}=\braket{\widetilde\psi_i}{\widetilde\psi_j}$. 试证明 $\exist U,\,U\ket{\psi_i}=\ket{\widetilde\psi_i}$, 并构造出该变换.
 
-对 $\left\{\ket{\psi_i}\right\}$、 $\left\{\ket{\widetilde\psi_i}\right\}$ 分别做 *Schmidt* 正交化, 得
+对 $\left\{\ket{\psi_i}\right\}$ 做 *Schmidt* 正交化, 得
+$$
+\begin{align*}
+\ket{0'}&=\ket{\psi_0}\\
+\ket{1'}&=\ket{\psi_1}-\frac{\braket{0'}{\psi_1}}{\braket {0'}{0'}}\ket{0'}\\
+\ket{2'}&=\ket{\psi_2}-\frac{\braket{0'}{\psi_2}}{\braket {0'}{0'}}\ket{0'}-\frac{\braket{1'}{\psi_2}}{\braket {1'}{1'}}\ket{1'}\\
+\cdots\\
+\ket{i'}&=\ket{\psi_i}-\sum_{n=0}^{i-1}\frac{\braket{n'}{\psi_i}}{\braket {n'}{n'}}\ket{n'}\\
+\end{align*}
+$$
+并进行归一化 $\ket{i}=\frac{1}{\braket{i'}{i'}}\ket{i'}$, 得到正交归一化态 $\left\{\ket{i}\right\}$.
+
+注意到正交化过程中的系数仅和 $\braket{\psi_i}{\psi_j}$ 相关, 因此我们可以用同样的系数对 $\left\{\ket{\widetilde \psi_i}\right\}$ 做 *Schmidt* 正交化得到 $\left\{\ket{\widetilde i}\right\}$. 
+
+于是我们有
+
 $$
 \begin{cases}
-\ket{\psi_i}=\sum_j{A_{ij}\ket j},&\braket ij=\delta_{ij}\\
-\ket{\widetilde\psi_i}=\sum_j{\widetilde A_{ij}\ket {\widetilde j}},&\braket{\widetilde i}{\widetilde j}=\delta_{ij}\\
+\ket{\psi_i}=\sum_kA_{ik}\ket{k},& \braket ij=\delta_{ij}\\
+\ket{\widetilde \psi_i}=\sum_kA_{ik}\ket{\widetilde k},& \braket{\widetilde i}{\widetilde j}=\delta_{ij}
 \end{cases}
 $$
-于是有
-$$
-\begin{equation}
-\begin{aligned}
-\braket{\psi_i}{\psi_j}
-&=\sum_k{
-{A_{ik}^*\bra k}
-}
-\cdot\sum_j{
-{A_{jl}^*\ket l}
-}\\
 
-&=\sum_{kl}{
-	A_{ik}^*A_{jl}^*\braket kl
-}\\
-
-&=\sum_{kl}{
-	A_{ik}^*A_{jl}^*\delta_{kl}
-}\\
-
-&=\sum_{k}{
-	A_{ik}^*A_{jk}
-}
-\end{aligned}
-\end{equation}
-$$
-同理有
-$$
-\braket{\widetilde\psi_i}{\widetilde\psi_j}=\sum_{k}{
-	\widetilde A_{ik}^*\widetilde A_{jk}
-}
-$$
-于是有 $\forall i,j$,
-$$
-\sum_{k}{
-	A_{ik}^*A_{jk}
-}
-=\braket{\psi_i}{\psi_j}
-=\braket{\widetilde\psi_i}{\widetilde\psi_j}
-=\sum_{k}{
-	\widetilde A_{ik}^*\widetilde A_{jk}
-}.
-$$
-显然我们可以取 $\widetilde A=A$ 来实现 *Schmidt* 正交化.
-
-由题 2 知, 我们可以构造酉变换 $U=\sum_i\ketbra{\widetilde i}i$ 使得 $U\ket i=\ket{\widetilde i}$.
+由题 2 知, 对于正交归一化态, 我们可以构造酉变换 $U=\sum_i\ketbra{\widetilde i}i$ 使得 $U\ket i=\ket{\widetilde i}$.
 
 此时有
 $$
-U\ket{\psi_i}=U\sum_j{A_{ij}\ket j}=\sum_j{A_{ij}U\ket j}=\sum_j{\widetilde A_{ij}\ket{\widetilde j}}=\ket{\widetilde\psi_i}
+U\ket{\psi_i}=U\sum_kA_{ik}\ket{k}=\sum_kA_{ik}U\ket{k}=\sum_kA_{ik}\ket{\widetilde k}=\ket{\widetilde \psi_i}
 $$
 至此, 我们已经构造出了满足条件的酉变换 $U$.
 
