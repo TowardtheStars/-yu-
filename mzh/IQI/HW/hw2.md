@@ -418,3 +418,61 @@ $$
 
 **证明**:
 
+考虑 $\H_A$ 空间的超算符, 用算符和表示为
+$$
+$(\rho_A)=\sum_\mu M_\mu\rho_A M_\mu^\dagger
+$$
+算符的个数记为 $N$.
+
+给定算符和表示后, 可以创造一个相应的幺正表示
+$$
+U_{AB}:\ket\varphi_A\otimes\ket0_B\rightarrow\sum_\mu{M_\mu\ket\varphi_A\otimes\ket\mu_B}
+$$
+其中 $\ket \mu_B$ 为 $\mathcal H_B$ 中的一组正交基. 由混态的统计解释，这种表示对一般的混合态也成立.
+
+对于 $\H_A\otimes\H_B$ 空间中的逆变换 $U_{AB}^{-1}=U_{AB}^\dagger$, 
+
+记 $U_{AB}^{-1}$ 在子系统 $\H_A$ 中的超算符为 $\$'$, 相应的算符为 $M'_\mu$, 算符个数记为 $N'$.
+
+于是我们有
+$$
+\begin{equation}
+\begin{aligned}
+$'$(\rho_A)
+&=\sum_\nu{
+	M_\nu'^\dagger
+	\left(\sum_\mu
+		M_\mu\rho_AM_\mu^\dagger
+	\right)
+	M'_\nu
+}\\
+
+&=\sum_{\nu\mu}{
+M_\nu'^\dagger M_\mu\rho_AM_\mu^\dagger M'_\nu
+}\\
+
+&=\sum_{\nu\mu}{
+(M_\nu'^\dagger M_\mu)\rho_A(M_\nu'^\dagger M_\mu)^\dagger
+}\\
+
+\end{aligned}
+\end{equation}
+$$
+$\$'\$$ 对应的算符个数为 $N'N$.
+
+令 $n=N(\nu-1)+\mu$, $K_n=M_\nu'^\dagger M_\mu$, 则
+$$
+$'$(\rho_A)=\sum_n{
+	K_n\rho_AK_n^\dagger
+}
+$$
+要令超算符可逆, 亦即 $\$'\$(\rho_A)=\rho_A$, 则必须令 $N'N=1$. 此时 $N'=N=1$, 有
+$$
+$(\rho_A)=M_1\rho_AM_1^\dagger,\qquad M_1^\dagger M_1=I
+$$
+即超算符是幺正的. 
+
+因此超算符可逆时必须是幺正的. 证毕.
+
+
+
