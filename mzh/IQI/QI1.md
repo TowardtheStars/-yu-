@@ -270,15 +270,23 @@ $$
   E_D=\lim_{n\rightarrow\infty}{\frac{k'_{max}}n}
   $$
 
+- 对于两体纯态, 两种纠缠度量均等于 Von Neumann 熵.
+  $$
+  \begin{equation}
+  E(\ket\psi_{AB}\bra\psi)=S(\rho_A)=S(\rho_B),\qquad S(\rho)=-\Tr(\rho\log_2\rho)
+  \end{equation}
+  $$
+
+
 #### Concurrence
 
-译为并发度 or 共生.
+译为并发度 or 共生, 适用于 2-qubit 纠缠.
 $$
 \begin{equation}
 \begin{gathered}
 \tilde\rho=(\sigma_y\otimes\sigma_y)\rho^*(\sigma_y\otimes\sigma_y)\\
-R=\sqrt{\sqrt\rho\tilde\rho\sqrt\rho},\,\mathrm{whose \,eigenvalue\,is\,}\lambda_1\ge\lambda_2\ge\lambda_3\ge\lambda_4\\
-C(\rho)=max\{0,\lambda_1-\lambda_2-\lambda_3-\lambda_4\}
+R=\Tr\sqrt{\rho^{1/2}\tilde\rho\rho^{1/2}},\,\mathrm{whose \,eigenvalue\,is\,}\lambda_1\ge\lambda_2\ge\lambda_3\ge\lambda_4\\
+C(\rho)=\max\{0,\lambda_1-\lambda_2-\lambda_3-\lambda_4\}
 \end{gathered}
 \end{equation}
 $$
@@ -289,10 +297,37 @@ $$
 
 其中 $h(x)=-x\log_2 x-(1-x)\log_2(1-x)$.
 
-#### 相对熵
+**对并发度公式的理解**
 
+时间反演算子:
+$$
+\hat T=i\sigma_y\hat K
+$$
+其中 $\hat K$ 为复共轭算子.
+
+于是有
+$$
+ \tilde\rho=(\hat T\otimes\hat T)\rho(\hat T^\dagger\otimes\hat T^\dagger)
+$$
+保真度 Fidelity:
+$$
+F(\rho, \sigma) \equiv \operatorname{Tr} \sqrt{\rho^{1 / 2} \sigma \rho^{1 / 2}}
+$$
+于是有
+$$
+R=F(\rho,\tilde\rho)
+$$
+
+#### 基于距离的纠缠度量
+
+相对熵:
 $$
 S(\sigma||\rho)=\mathrm{Tr}\left( \sigma(\log_2\sigma-\log_2\rho) \right).
+$$
+
+纯态下退化为 Von Neumann 熵
+$$
+S(\rho_{AB}||\rho_A\otimes\rho_B)=S(\rho_A)+S(\rho_B)-S(\rho_{AB})
 $$
 
 ### 1.7.3 纠缠态的判定和分类
@@ -303,7 +338,7 @@ $$
 
 - 部分转置半正定：PPT, Positive Partial Transpose
 - 判定两体系统可分的必要条件.
-- 对于2x2,2x3系统，P-H判据为可分态的充要条件.
+- 对于 $\mathcal H_2\otimes\mathcal H_2$, $\mathcal H_3\otimes\mathcal H_3$ 系统，P-H 判据为可分态的充要条件.
 
 
 
