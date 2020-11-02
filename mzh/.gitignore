@@ -1,3 +1,7 @@
 *.pdf
+*.doc*
+*.ppt*
+*.xls*
+
 books/
 slides/
