@@ -14,6 +14,7 @@ $$
 \newcommand{\cases}[1]{\begin{cases}#1\end{cases}}
 \newcommand{\cprob}[2]{\textrm{Prob}\left(#1|#2\right)}
 \newcommand{\prob}[1]{\textrm{Prob}\left(#1\right)}
+\newcommand{\mleq}[1]{\begin{equation}\begin{aligned}#1\end{aligned}\end{equation}}
 \end{align*}
 $$
 # 第三次作业
@@ -34,14 +35,13 @@ $$
 
 **解**: 不妨设 $\ket\psi$ 所在的 Hilbert 空间为 $\H_A\otimes\H_B$, 则 $A$ 空间的约化密度矩阵为
 $$
-\begin{equation}
-\begin{aligned}
-\rho_A&=\Tr_B\left(\ketbra{\psi_{AB}}{\psi_{AB}}\right)\\
-&=\sideset{_B}{_B}{\bra0\cdot\ketbra{\psi_{AB}}{\psi_{AB}}\cdot\ket0}+\sideset{_B}{_B}{\bra1\cdot\ketbra{\psi_{AB}}{\psi_{AB}}\cdot\ket1}\\
-&=\frac12(\ket0_A\bra0+\ket1_A\bra1)+\frac14(\ket0_A\bra1+\ket1_A\bra0)\\
-&=\frac34\ket+_A\bra++\frac14\ket-_A\bra-
-\end{aligned}
-\end{equation}
+\mleq{
+    \rho_A&=\Tr_B\left(\ketbra{\psi_{AB}}{\psi_{AB}}\right)\\
+    &=\sideset{_B}{_B}{\bra0\cdot\ketbra{\psi_{AB}}{\psi_{AB}}\cdot\ket0}
+    	+\sideset{_B}{_B}{\bra1\cdot\ketbra{\psi_{AB}}{\psi_{AB}}\cdot\ket1}\\
+    &=\frac12(\ket0_A\bra0+\ket1_A\bra1)+\frac14(\ket0_A\bra1+\ket1_A\bra0)\\
+    &=\frac34\ket+_A\bra++\frac14\ket-_A\bra-
+}
 $$
 其中$\ket\pm=\frac1{\sqrt2}(\ket0\pm\ket1)$.
 
@@ -201,23 +201,106 @@ X\rho X^\dagger+Y\rho Y^\dagger+Z\rho Z^\dagger=\frac{3I-\boldsymbol\sigma\cdot 
 $$
 现在我们将超算符 $\xi(\rho)$ 改写为
 $$
-\xi(\rho)=\frac p4(2I-\rho)+(1-\frac34p)\rho
+\xi(\rho)=\frac p4(2I-\rho)+(1-\frac{3p}4)\rho
 $$
 于是我们可以构造出以下 Kraus 算子
 $$
-M_0=\sqrt{1-\frac 34p}\cdot I,\quad M_1=\sqrt\frac p4X, \quad M_2=\sqrt\frac p4Y, \quad M_3=\sqrt\frac p4Z,
+M_0=\sqrt{1-\frac {3p}4}\cdot I,\quad M_1=\sqrt\frac p4X, \quad M_2=\sqrt\frac p4Y, \quad M_3=\sqrt\frac p4Z,
 $$
 $d=3$ 时不会算.
 
 
 
-### 8*：证明超算符仅在幺正条件下才是可逆的。(选做思考题) 
+### 8*：证明超算符仅在幺正条件下才是可逆的. (选做思考题) 
 
-上次做过了
+考虑 $\H_A$ 空间的超算符, 用算符和表示为
+$$
+$(\rho_A)=\sum_\mu M_\mu\rho_A M_\mu^\dagger
+$$
+算符的个数记为 $N$.
+
+给定算符和表示后, 可以创造一个相应的幺正表示
+$$
+U_{AB}:\ket\varphi_A\otimes\ket0_B\rightarrow\sum_\mu{M_\mu\ket\varphi_A\otimes\ket\mu_B}
+$$
+其中 $\ket \mu_B$ 为 $\mathcal H_B$ 中的一组正交基. 由混态的统计解释，这种表示对一般的混合态也成立.
+
+对于 $\H_A\otimes\H_B$ 空间中的逆变换 $U_{AB}^{-1}=U_{AB}^\dagger$, 
+
+记 $U_{AB}^{-1}$ 在子系统 $\H_A$ 中的超算符为 $\$'$, 相应的算符为 $M'_\mu$, 算符个数记为 $N'$.
+
+于是我们有
+$$
+\begin{equation}
+\begin{aligned}
+$'$(\rho_A)
+&=\sum_\nu{
+	M_\nu'^\dagger
+	\left(\sum_\mu
+		M_\mu\rho_AM_\mu^\dagger
+	\right)
+	M'_\nu
+}\\
+
+&=\sum_{\nu\mu}{
+M_\nu'^\dagger M_\mu\rho_AM_\mu^\dagger M'_\nu
+}\\
+
+&=\sum_{\nu\mu}{
+(M_\nu'^\dagger M_\mu)\rho_A(M_\nu'^\dagger M_\mu)^\dagger
+}\\
+
+\end{aligned}
+\end{equation}
+$$
+$\$'\$$ 对应的算符个数为 $N'N$.
+
+令 $n=N(\nu-1)+\mu$, $K_n=M_\nu'^\dagger M_\mu$, 则
+$$
+$'$(\rho_A)=\sum_n{
+	K_n\rho_AK_n^\dagger
+}
+$$
+要令超算符可逆, 亦即 $\$'\$(\rho_A)=\rho_A$, 则必须令 $N'N=1$. 此时 $N'=N=1$, 有
+$$
+$(\rho_A)=M_1\rho_AM_1^\dagger,\qquad M_1^\dagger M_1=I
+$$
+即超算符是幺正的. 
+
+因此超算符可逆时必须是幺正的. 证毕.
 
 
 
-### 9. 证明 $\ket{\Psi^-}=\frac1{\sqrt2}\left(\ketbra01-\ketbra10\right)$ 在 $U(\vartheta,\boldsymbol n)\otimes U(\vartheta,\boldsymbol n)$ 下是不变的.
+### 9. 证明 $\ket{\Psi^-}=\frac1{\sqrt2}\left(\ket0\ket1-\ket1\ket0\right)$ 在 $U(\vartheta,\hat{\boldsymbol n})\otimes U(\vartheta,\hat{\boldsymbol n})$ 下是不变的.
+
+**证**: $U(\vartheta,\hat{\boldsymbol n})$可以写为
+$$
+U(\vartheta,\boldsymbol n)=\exp(i\frac\vartheta2\boldsymbol\sigma\cdot \hat{\boldsymbol n})=I\cos\frac\vartheta2-i\boldsymbol\sigma\cdot \hat{\boldsymbol n}\sin\frac\vartheta2
+$$
+其中 $\hat{\boldsymbol n}=(n_1,n_2,n_3)^T$.
+
+于是我们有
+$$
+\begin{align}
+U(\vartheta,\hat{\boldsymbol n})\ket0&=(\cos\frac\vartheta2-in_3\sin\frac\vartheta2)\ket0-(in_1-n_2)\sin\frac\vartheta2\ket1\\
+U(\vartheta,\hat{\boldsymbol n})\ket1&=(\cos\frac\vartheta2+in_3\sin\frac\vartheta2)\ket1-(in_1+n_2)\sin\frac\vartheta2\ket0
+\end{align}
+$$
+从而
+$$
+\mleq{
+&U(\vartheta,\hat{\boldsymbol n})\otimes U(\vartheta,\hat{\boldsymbol n})\ket{\Psi^-}\\
+=&\frac1{\sqrt2}\left[U(\vartheta,\hat{\boldsymbol n})\ket0\otimes U(\vartheta,\hat{\boldsymbol n})\ket1-U(\vartheta,\hat{\boldsymbol n})\ket1\otimes U(\vartheta,\hat{\boldsymbol n})\ket0\right]\\
+=&\frac1{\sqrt2}\left[(\cos\frac\vartheta2-in_3\sin\frac\vartheta2)(\cos\frac\vartheta2+in_3\sin\frac\vartheta2)-(in_1+n_2)(in_1-n_2)\sin^2\frac\vartheta2\right]\ket0\ket1\\
+&+\frac1{\sqrt2}\left[(in_1-n_2)(in_1+n_2)\sin^2\frac\vartheta2-(\cos\frac\vartheta2+in_3\sin\frac\vartheta2)(\cos\frac\vartheta2-in_3\sin\frac\vartheta2)\right]\ket1\ket0\\
+=&\frac1{\sqrt2}\left[\cos^2\frac\vartheta2+(n_1^2+n_2^2+n_3^2)\sin^2\frac\vartheta2\right]\ket0\ket1\\
+&-\frac1{\sqrt2}\left[\cos^2\frac\vartheta2+(n_1^2+n_2^2+n_3^2)\sin^2\frac\vartheta2\right]\ket1\ket0\\
+=&\frac1{\sqrt2}\left(\ket0\ket1-\ket1\ket0\right)
+}
+$$
+
+证毕.
+
 
 
 
@@ -227,7 +310,46 @@ $d=3$ 时不会算.
 
 
 
-### 2. 计算混合量子态 $\rho=p\ketbra{\Phi^+}{\Phi^+}+\frac{1-p}4I\otimes I$ 的纠缠concurrence，其中 $0\le p\le1$，$\ket{\Phi^+}$ 是 Bell 态.
+### 2. 计算混合量子态 $\rho=p\ketbra{\Phi^+}{\Phi^+}+\frac{1-p}4I\otimes I$ 的纠缠 concurrence，其中 $0\le p\le1$，$\ket{\Phi^+}$ 是 Bell 态.
+
+已知
+$$
+\mleq{
+\rho&=p\ketbra{\Phi^+}{\Phi^+}+\frac{1-p}4\sum_{\ket\alpha\in \mathrm{Bell\,State}}\ketbra\alpha\alpha\\
+&=\frac{1+3p}4\ketbra{\Phi^+}{\Phi^+}+\frac{1-p}4\left(\ketbra{\Phi^-}{\Phi^-}+\ketbra{\Psi^+}{\Psi^+}+\ketbra{\Psi^-}{\Psi^-}\right)
+}
+$$
+
+由于
+$$
+\cases{
+	\sigma_y\otimes\sigma_y\ket{\Phi^+}=-\ket{\Phi^+}\\
+	\sigma_y\otimes\sigma_y\ket{\Phi^-}=+\ket{\Phi^-}\\
+	\sigma_y\otimes\sigma_y\ket{\Psi^+}=+\ket{\Psi^+}\\
+	\sigma_y\otimes\sigma_y\ket{\Psi^-}=-\ket{\Psi^-}\\
+}
+$$
+故
+$$
+\tilde\rho=(\sigma_y\otimes\sigma_y)\rho^*(\sigma_y\otimes\sigma_y)=\rho
+$$
+
+从而
+$$
+\mleq{
+R&=\sqrt{\sqrt\rho\tilde\rho\sqrt\rho}\\
+&=\sqrt{U\sqrt\Lambda U^\dagger \cdot U\Lambda U^\dagger \cdot U\sqrt\Lambda U^\dagger}\\
+&=\sqrt{U\Lambda^2U^\dagger}\\
+&=U\Lambda U^\dagger\\
+&=\rho
+}
+$$
+由式 (31) 易知 $\rho$ 的本征值为 $\frac{1+3p}4$, $\frac{1-p}4$, $\frac{1-p}4$, $\frac{1-p}4$.
+
+故纠缠 Concurrence
+$$
+C(\rho)=\max\left\{\frac{1+3p}4-3\cdot\frac{1-p}4,\quad0\right\}=\max\left\{\frac{3p-1}2,\quad0\right\}
+$$
 
 
 ### 3. 相对熵的单调性(Lindblad-Uhlmann定理)是说，复合系统中两混合态的相对熵大于其约化子系统中量子态的相对熵，数学表示为 $S(\rho_A|\sigma_A)\le S(\rho_{AB}|\sigma_{AB})$. 试利用该定理证明下面结论：

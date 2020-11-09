@@ -14,5 +14,6 @@ $$
 \newcommand{\cases}[1]{\begin{cases}#1\end{cases}}
 \newcommand{\cprob}[2]{\textrm{Prob}\left(#1|#2\right)}
 \newcommand{\prob}[1]{\textrm{Prob}\left(#1\right)}
+\newcommand{\mleq}[1]{\begin{equation}\begin{aligned}#1\end{aligned}\end{equation}}
 \end{align*}
 $$
