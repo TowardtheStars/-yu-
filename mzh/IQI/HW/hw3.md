@@ -53,8 +53,6 @@ $$
 
 于是我们只需要对 $\ket\psi$ 做单方的局域幺正操作 $H_A\otimes I_B$ 即可将其变换成 $\rho$ 的纯化态.
 
-
-
 #### (b) 
 
 $$
@@ -310,6 +308,8 @@ $$
 
 
 
+
+
 ### 2. 计算混合量子态 $\rho=p\ketbra{\Phi^+}{\Phi^+}+\frac{1-p}4I\otimes I$ 的纠缠 concurrence，其中 $0\le p\le1$，$\ket{\Phi^+}$ 是 Bell 态.
 
 已知
@@ -344,7 +344,7 @@ R&=\sqrt{\sqrt\rho\tilde\rho\sqrt\rho}\\
 &=\rho
 }
 $$
-由式 (31) 易知 $\rho$ 的本征值为 $\frac{1+3p}4$, $\frac{1-p}4$, $\frac{1-p}4$, $\frac{1-p}4$.
+由 Bell 基下的分解易知 $\rho$ 的本征值为 $\frac{1+3p}4$, $\frac{1-p}4$, $\frac{1-p}4$, $\frac{1-p}4$.
 
 故纠缠 Concurrence
 $$
@@ -352,22 +352,157 @@ C(\rho)=\max\left\{\frac{1+3p}4-3\cdot\frac{1-p}4,\quad0\right\}=\max\left\{\fra
 $$
 
 
-### 3. 相对熵的单调性(Lindblad-Uhlmann定理)是说，复合系统中两混合态的相对熵大于其约化子系统中量子态的相对熵，数学表示为 $S(\rho_A|\sigma_A)\le S(\rho_{AB}|\sigma_{AB})$. 试利用该定理证明下面结论：
+
+### 3. 相对熵的单调性(Lindblad-Uhlmann定理)是说，复合系统中两混合态的相对熵大于其约化子系统中量子态的相对熵，数学表示为 $S(\rho_A||\sigma_A)\le S(\rho_{AB}||\sigma_{AB})$. 试利用该定理证明下面结论：
 
 #### (a) 考察三体态 $\rho_{ABC}$ 和 $\rho_A\otimes\rho_{BC}$ 之间的相对熵, 并证明 Von Neumann 熵的强次加定理.
 
+由相对熵定义易得
+$$
+\mleq{
+S(\rho_{AB}||\rho_A\otimes\rho_{B})&=\Tr\left[\rho_{AB}(\log_2\rho_{AB}\right]-\Tr\left[\rho_{AB}\log_2{\rho_A\otimes\rho_B})\right]\\
+&=-S(\rho_{AB})-\Tr_A\left[\Tr_{B}(\rho_{AB})\log_2{\rho_A}\right]\\
+&\quad-\Tr_{B}\left[\Tr_{A}(\rho_{AB})\log_2{\rho_{B}}\right]\\
+&=S(\rho_A)+S(\rho_B)-S(\rho_{AB})
+}
+$$
+同理可得
+$$
+S(\rho_{ABC}||\rho_{A}\otimes\rho_{BC})=S(\rho_A)+S(\rho_{BC})-S(\rho_{ABC})
+$$
+由 Lindblad-Uhlmann 定理得
+$$
+\begin{equation*}
+S(\rho_{AB}||\rho_A\otimes\rho_{B})\le S(\rho_{ABC}||\rho_{A}\otimes\rho_{BC})\\
+\Leftrightarrow S(\rho_A)+S(\rho_B)-S(\rho_{AB})\le S(\rho_A)+S(\rho_{BC})-S(\rho_{ABC})\\
+\Leftrightarrow S(\rho_{ABC})+S(\rho_B)\le S(\rho_{AB})+S(\rho_{BC})
+\end{equation*}
+$$
+强次加定理得证.
+
+#### (b) 利用超算符对应于扩张空间的某个酉变换, 证明相对熵在超算符演化下不增加，亦即 $S(\$\rho||\$\sigma)\le S(\rho||\sigma)$.
+
+设主空间为 $\H_A$, 并引入 $\H_B$ 空间的辅助比特构造扩张空间的酉变换, 其初态为 $\ket0_B$. 则
+$$
+\$\rho_A=\Tr_B\left[U_{AB}\left(\rho_A\otimes\ket0_B\bra0\right)U_{AB}^\dagger\right]
+$$
+于是由 Lindblad-Uhlmann 定理得
+$$
+\mleq{
+	S(\$\rho_A||\$\sigma_A)&\le S\left(
+		U_{AB}\left(\rho_A\otimes\ket0_B\bra0\right)U_{AB}^\dagger||
+		U_{AB}\left(\sigma_A\otimes\ket0_B\bra0\right)U_{AB}^\dagger
+	\right)\\
+	&=S\left(
+		\rho_A\otimes\ket0_B\bra0||
+		\sigma_A\otimes\ket0_B\bra0
+	\right)\\
+	&=S(\rho_A||\sigma_A)
+}
+$$
+证毕. 其中用到了 Von Neumann 熵在酉变换下的不变性以及纯态情形为 0 的性质.
 
 
-#### (b) 利用超算符对应于扩张空间的某个酉变换, 证明相对熵在超算符演化下不增加，亦即 $S(\$\rho|\$\sigma)\le S(\rho|\sigma)$.
 
+#### (c) 利用 (b) 中的结果，证明超算符演化下，混合态系综 $\varepsilon=\left\{p_x,\rho_x\right\}$ 的 Holevo 信息不会增加，亦即 $\chi\left(\$(\varepsilon)\right)\le\chi(\varepsilon)$，其中 $\chi(\varepsilon)=S(\sum_x{p_x\rho_x})-\sum_x{p_xS(\rho_x)}$.
 
+令 (b) 中的 $\rho=\rho_x$, $\sigma=\varepsilon=\sum_xp_x\rho_x$, 并令 $\$(\rho_x)=\rho_x'$, $\$(\varepsilon)=\varepsilon'$, 并以权重 $p_x$ 对下标 $x$ 求和, 有
+$$
+\sum_x{p_xS(\rho_x'||\varepsilon')\le\sum_x{p_xS(\rho_x||\varepsilon)}}
+$$
 
-#### (c) 利用b中的结果，证明超算符演化下，混合态系综 $\varepsilon=\left\{p_x,\rho_x\right\}$ 的 Holevo 信息不会增加，亦即 $\chi\left(\$(\varepsilon)\right)\le\xi(\varepsilon)$，其中 $\xi(\varepsilon)=S(\sum_x{p_x\rho_X})-\sum_x{p_xS(\rho_x)}$.
+不等式左侧
+$$
+\mleq{
+	\sum_xp_x{S(\rho_x'||\varepsilon')}
+	&=\sum_xp_x\Tr\left[\rho'_x\left(\log_2\rho_x'-\log_2\varepsilon'\right)\right]\\
+	&=-\sum_xp_xS(\rho_x')-\Tr\left[\left(\sum_xp_x\rho_x'\right)\log_2\varepsilon'\right]\\
+	&=S\left(\sum_xp_x\rho_x'\right)-\sum_xp_xS(\rho_x')\\
+	&=\chi(\varepsilon')
+}
+$$
+同理可得不等式右侧
+$$
+\sum_x{p_xS(\rho_x||\varepsilon)}=\chi(\varepsilon)
+$$
+于是
+$$
+\chi(\$(\varepsilon))=\chi(\varepsilon')\le\chi(\varepsilon)
+$$
+证毕.
+
 
 
 
 ### 10. 证明 $S(\rho_A)+S(\rho_B)\le S(\rho_{AC})+S(\rho_{BC})$.
 
+**证:**
+
+下面仅从强次可加性出发来证明.
+
+强次可加性:
+$$
+S(\rho_{ABC})+S(\rho_B)\le S(\rho_{AB})+S(\rho_{BC})
+$$
+通过扩展空间 $R$ 使得 $\rho_{ABC}$ 纯化, 即 $\rho_{ABCR}$ 为纯态. 于是有
+$$
+S(\rho_{ABC})=S(\rho_R),\qquad S(\rho_{AB})=S(\rho_{RC})
+$$
+从而
+$$
+S(\rho_R)+S(\rho_B)\le S(\rho_{RC})+S(\rho_{BC})
+$$
+将 $R$ 改写为 $A$ 即得待证命题.
+
+由 QCQI, Nielsen & Chuang 书 11.4.1, 需要一系列定理得到条件熵的上凸性, 进而得到上述命题.
+
 
 
 ### 11. 考虑 2－qubit 系统 $\rho_{AB}=\frac18I\otimes I+\frac12\ketbra{\Psi^-}{\Psi^-}$, 分别沿 $\hat m$, $\hat n$ 方向测 $A$, $B$ 粒子的自旋. 其中 $\hat m\cdot\hat n=\cos\vartheta$, 则测量结果均为向上的联合概率是多少? 由 Peres-Horodeski 判据，确定 $\rho_{AB}$ 是否为可分量子态.
+
+由补充作业 2 题 9 可知, $\ket{\Psi^-}$ 在 $U(\vartheta,\hat{\boldsymbol n})\otimes U(\vartheta,\hat{\boldsymbol n})$ 下是不变的, 故 $\rho_{AB}$ 在此变换下也是不变的, 不妨设 $\ket{m_+}=\ket\uparrow=\ket0$.
+
+于是可以将 $\ket{n_+}$ 表示为
+$$
+\ket{n_+}=\cos\frac\vartheta2\ket\uparrow+e^{i\varphi}\sin\frac\vartheta2\ket\downarrow=\cos\frac\vartheta2\ket0+e^{i\varphi}\sin\frac\vartheta2\ket1
+$$
+于是测量结果均为向上的联合概率为
+$$
+\mleq{
+	\prob{m_+,n_+}
+	&=\Tr(\ket{m_+}_A\bra{m_+}\otimes\ket{n_+}_B\bra{n_+}\rho_{AB})\\
+	&=\sideset{_A}{_A}{\bra{m_+}\sideset{_B}{_B}{\bra{n_+}\rho_{AB}\ket{n_+}}\ket{m_+}}\\
+	&=\frac18+\frac12\abs{
+		\bra{\Psi^-}\left(\cos\frac\vartheta2\ket{00}+e^{i\varphi}\sin\frac\vartheta2\ket{01}\right)
+	}^2\\
+	&=\frac18+\frac14\sin^2\frac\vartheta2
+}
+$$
+下面将 $\rho_{AB}$ 写成矩阵形式
+$$
+\rho_{AB}=\frac18I_{4\times4}+\frac14\pmatrix{
+	0&  &  & \\
+	 & 1&-1& \\
+	 &-1&1 & \\
+	 &  &  &0\\
+}=\pmatrix{
+	\frac18&  &  & \\
+	 & \frac38&-\frac14& \\
+	 &-\frac14&\frac38 & \\
+	 &  &  &\frac18\\
+}
+$$
+在 $\H_B$ 空间做部分转置, 有
+$$
+\rho_{AB}^{T_B}=\pmatrix{
+	\frac18&  &  &-\frac14 \\
+	 & \frac38&& \\
+	 &&\frac38 & \\
+	-\frac14 &  &  &\frac18\\
+}
+$$
+令 $\det(\lambda I-\rho_{AB}^{T_B})=0$, 得
+$$
+\left(\lambda-\frac38\right)^2\left[\left(\lambda-\frac18\right)^2-\left(\frac14\right)^2\right]=0
+$$
+有负特征值 $\lambda=-1/8$, 不满足部分转置半正定的条件, 故 $\rho_{AB}$ 不是可分态.
