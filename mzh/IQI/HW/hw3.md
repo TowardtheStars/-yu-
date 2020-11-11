@@ -181,7 +181,7 @@ $$
 
 ### 3.假定有一个超算符演化满足 $\xi(\rho)=\frac pdI+(1-p)\rho$, 其中 $p$ 为小于等于 1 的实数, $d$表示系统的维数,试在 $d=2$ 时，构造出该演化的算符和形式. 如果 $d=3$,该如何构造？
 
-先讨论 $d=2$ 的情形, 此时可以将密度矩阵表示为
+**(i)**. 先讨论 $d=2$ 的情形, 此时可以将密度矩阵表示为
 $$
 \rho=\frac{I+\boldsymbol\sigma\cdot \boldsymbol r}2
 $$
@@ -199,13 +199,69 @@ X\rho X^\dagger+Y\rho Y^\dagger+Z\rho Z^\dagger=\frac{3I-\boldsymbol\sigma\cdot 
 $$
 现在我们将超算符 $\xi(\rho)$ 改写为
 $$
-\xi(\rho)=\frac p4(2I-\rho)+(1-\frac{3p}4)\rho
+\xi(\rho)=\frac p4(2I-\rho)+\left(1-\frac{3p}4\right)\rho=\frac p4\sum_k\sigma_k\rho\sigma_k^\dagger+\left(1-\frac{3p}4\right)I\rho I^\dagger
 $$
 于是我们可以构造出以下 Kraus 算子
 $$
 M_0=\sqrt{1-\frac {3p}4}\cdot I,\quad M_1=\sqrt\frac p4X, \quad M_2=\sqrt\frac p4Y, \quad M_3=\sqrt\frac p4Z,
 $$
-$d=3$ 时不会算.
+**(ii)**. 当 $d=3$ 时, 类似 Pauli 矩阵, 有构成 SU(3) 完备基的 Gell-Mann 矩阵, 形式如下:
+$$
+\mleq{
+\lambda_1&=\left[\begin{matrix}0 & 1 & 0\\1 & 0 & 0\\0 & 0 & 0\end{matrix}\right],&
+\lambda_2&=\left[\begin{matrix}0 & - i & 0\\i & 0 & 0\\0 & 0 & 0\end{matrix}\right],&
+\lambda_3&=\left[\begin{matrix}1 & 0 & 0\\0 & -1 & 0\\0 & 0 & 0\end{matrix}\right]\\
+\lambda_4&=\left[\begin{matrix}0 & 0 & 1\\0 & 0 & 0\\1 & 0 & 0\end{matrix}\right]&
+\lambda_5&=\left[\begin{matrix}0 & 0 & - i\\0 & 0 & 0\\i & 0 & 0\end{matrix}\right]&
+\lambda_6&=\left[\begin{matrix}0 & 0 & 0\\0 & 0 & 1\\0 & 1 & 0\end{matrix}\right]\\
+\lambda_7&=\left[\begin{matrix}0 & 0 & 0\\0 & 0 & - i\\0 & i & 0\end{matrix}\right]&
+\lambda_8&=\left[\begin{matrix}\frac{\sqrt{3}}{3} & 0 & 0\\0 & \frac{\sqrt{3}}{3} & 0\\0 & 0 & - \frac{2 \sqrt{3}}{3}\end{matrix}\right]&
+}
+$$
+需要注意的是这些矩阵是厄密的但并不是酉的, 其平方和 $\sum_k\lambda_k^2=\frac{16}3I$.
+
+此时密度矩阵可以表示为
+$$
+\rho=\frac{I+\boldsymbol\lambda\cdot\boldsymbol r}3
+$$
+其中 Bloch 向量 $\boldsymbol r$ 是一个 8 维向量, 此处我们不关心它的取值范围.
+
+注意到绝大多数情况下 $\lambda_k\lambda_i\lambda_k^\dagger=\alpha_i^{(k)}\lambda_i$, 系数 $\alpha_i^{(k)}$ 列表如下
+
+| $\lambda_i$ | $\alpha_i^{(1)}$ | $\alpha_i^{(2)}$ | $\alpha_i^{(3)}$ | $\alpha_i^{(4)}$ | $\alpha_i^{(5)}$ | $\alpha_i^{(6)}$ | $\alpha_i^{(7)}$ | $\alpha_i^{(8)}$ | $\sum_k\alpha_i^{(k)}$ |
+| :---------: | :--------------: | :--------------: | :--------------: | :--------------: | :--------------: | :--------------: | :--------------: | :--------------: | ---------------------- |
+| $\lambda_1$ |        1         |        -1        |        -1        |        0         |        0         |        0         |        0         |       1/3        | -2/3                   |
+| $\lambda_2$ |        -1        |        1         |        -1        |        0         |        0         |        0         |        0         |       1/3        | -2/3                   |
+| $\lambda_3$ |        -1        |        -1        |        1         |        0         |        0         |        0         |        0         |       1/3        | -2/3                   |
+| $\lambda_4$ |        0         |        0         |        0         |        1         |        -1        |        0         |        0         |       -2/3       | -2/3                   |
+| $\lambda_5$ |        0         |        0         |        0         |        -1        |        1         |        0         |        0         |       -2/3       | -2/3                   |
+| $\lambda_6$ |        0         |        0         |        0         |        0         |        0         |        1         |        -1        |       -2/3       | -2/3                   |
+| $\lambda_7$ |        0         |        0         |        0         |        0         |        0         |        -1        |        1         |       -2/3       | -2/3                   |
+| $\lambda_8$ |        1         |        1         |        1         |        -         |        -         |        -         |        -         |        1         | -2/3                   |
+
+其中标 `-` 的项表示其不满足 $\lambda_k\lambda_i\lambda_k^\dagger=\alpha_i^{(k)}\lambda_i$ , 但是我们注意到其算符和形式仍满足 $\sum_k\lambda_k\lambda_i\lambda_k^\dagger=\sum_k\alpha_i^{(k)}\lambda_i$, 而且对于 $\forall k$, 系数均为 $-2/3$, 于是我们有
+
+$$
+\sum_k\lambda_k\rho \lambda_k^\dagger=\frac{16I-2\boldsymbol\lambda\cdot\boldsymbol r}9=2I-\frac{2}3\rho
+$$
+现在把超算符 $\xi(\rho)$ 改写为
+$$
+\xi(\rho)=\frac{p}{6}\left(2I-\frac{2}3\rho\right)
++\left(1-\frac{8p}{9}\right)\rho
+=\frac{p}{6}\sum_k\lambda_k\rho \lambda_k^\dagger+\left(
+	1-\frac{8p}{9}\right)I\rho I^\dagger
+$$
+于是我们可以构造出以下 Kraus 算子
+$$
+\begin{equation}
+M_i=
+\left\{\begin{aligned}
+	&\sqrt{1-\frac{8p}9}\cdot I,&i=0\\
+	&\sqrt\frac p6\cdot\lambda_i,&i=1,2,\ldots,8
+
+\end{aligned}\right.
+\end{equation}
+$$
 
 
 
@@ -304,9 +360,57 @@ $$
 
 ## 补充习题3
 
-### 1. 试证明相对熵纠缠度量在纯态情况下和 Von Neumann 熵是等价的. 即求任意给定纯态 $\ket{\psi_{AB}}$ 和任意混合态 $\sum_i{p_i\rho_i\otimes\sigma_i}$ 中的最小相对熵 $S(\ketbra{\psi_{AB}}{\psi_{AB}}||\sum_i{p_i\rho_i\otimes\sigma_i})$.
+### 1. 试证明相对熵纠缠度量在纯态情况下和 Von Neumann 熵是等价的. 即求任意给定纯态 $\ket{\psi_{AB}}$ 和任意混合态 $\sum_i{p_i\rho_i\otimes\sigma_i}$ 中的最小相对熵 $S\left(\ketbra{\psi_{AB}}{\psi_{AB}}||\sum_i{p_i\rho_i\otimes\sigma_i}\right)$.
 
+记 $\rho_{AB}=\ketbra{\psi_{AB}}{\psi_{AB}}$, 于是有
+$$
+\mleq{
+	&S\left(\rho_{AB}||\sum_i{p_i\rho_i\otimes\sigma_i}\right)\\
+	&=-\Tr\left[
+		\rho_{AB}\log_2\left(\sum_i{p_i\rho_i\otimes\sigma_i}\right)
+	\right]\\
+	&=-S(\rho_{AB})-\Tr\left[
+		\rho_{AB}\left(
+		\log_2\sum_i{p_i\rho_i\otimes I_B +
+		I_A\otimes\log_2\sum_i{p_i\sigma_i}}
+		\right)
+	\right]\\
+	&=-S(\rho_{AB})-\Tr_A\left[
+		\rho_A
+		\log_2\sum_i{p_i\rho_i}
+	\right]
+	-\Tr_B\left[
+		\rho_B
+		\log_2\sum_i{p_i\sigma_i}
+	\right]
+}
+$$
+其中 $\rho_A$, $\rho_B$ 为 $\rho_{AB}$ 的约化密度矩阵.
 
+由 Klein 不等式
+$$
+\begin{align}
+S\left(\rho_A\left|\left|\sum_ip_i\rho_i\right.\right.\right)=-S(\rho_A)-\Tr_A\left[
+		\rho_A
+		\log_2\sum_i{p_i\rho_i}
+	\right]\ge0\\
+
+S\left(\rho_B\left|\left|\sum_ip_i\sigma_i\right.\right.\right)=-S(\rho_B)-\Tr_B\left[
+		\rho_B
+		\log_2\sum_i{p_i\sigma_i}
+	\right]\ge0
+	
+\end{align}
+$$
+当且仅当 $\rho_A=\sum_i{p_i\rho_i}$, $\rho_B=\sum_i{p_i\sigma_i}$ 时取等号.
+
+于是
+$$
+S\left(\rho_{AB}||\sum_i{p_i\rho_i\otimes\sigma_i}\right)\ge S(\rho_A)+S(\rho_B)-S(\rho_{AB})=I(A:B)
+$$
+当且仅当 $\rho_A=\sum_i{p_i\rho_i}$, $\rho_B=\sum_i{p_i\sigma_i}$ 时取等号.
+
+故最小相对熵在纯态情形下退化为了 Von Neumann 熵, 得证.
 
 
 
@@ -344,7 +448,7 @@ R&=\sqrt{\sqrt\rho\tilde\rho\sqrt\rho}\\
 &=\rho
 }
 $$
-由 Bell 基下的分解易知 $\rho$ 的本征值为 $\frac{1+3p}4$, $\frac{1-p}4$, $\frac{1-p}4$, $\frac{1-p}4$.
+由 Bell 基下的分解, 即式 (40) 易知 $\rho$ 的本征值为 $\frac{1+3p}4$, $\frac{1-p}4$, $\frac{1-p}4$, $\frac{1-p}4$.
 
 故纠缠 Concurrence
 $$
@@ -400,7 +504,7 @@ $$
 	&=S(\rho_A||\sigma_A)
 }
 $$
-证毕. 其中用到了 Von Neumann 熵在酉变换下的不变性以及纯态情形为 0 的性质.
+证毕. 上式用到了 Von Neumann 熵在酉变换下的不变性以及纯态情形为 0 的性质.
 
 
 
@@ -425,7 +529,7 @@ $$
 $$
 \sum_x{p_xS(\rho_x||\varepsilon)}=\chi(\varepsilon)
 $$
-于是
+于是式 (49) 化为
 $$
 \chi(\$(\varepsilon))=\chi(\varepsilon')\le\chi(\varepsilon)
 $$
