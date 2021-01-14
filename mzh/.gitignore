@@ -1,7 +1,14 @@
+books/
+slides/
+report/
+
 *.pdf
+
+# office
 *.doc*
 *.ppt*
 *.xls*
 
-books/
-slides/
+*.zip
+*.gz
+*.xz

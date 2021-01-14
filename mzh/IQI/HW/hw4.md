@@ -94,14 +94,96 @@ $$
 
 ### 2. 给出高维空间量子 teleportation 的数学证明.
 
- 
+ Alice 和 Bob 共享一组 N 能级系统最大纠缠态
+$$
+\ket{\Phi}_{AB}=\frac1{\sqrt N}\sum_{j=0}^{N-1}\ket j_A\ket{j}_B
+$$
+设待传送比特为
+$$
+\ket{\psi}_X=\sum_{j=0}^{N-1}\alpha_j\ket{j}_X
+$$
+N 能级系统的 Bell 基可表示为
+$$
+\ket{\Psi_{nm}}=\frac1{\sqrt N}\sum_{j=0}^Ne^{i2\pi jn/N}\ket j\ket{(j+m)\mod N}
+$$
+从而
+$$
+\begin{equation}
+\begin{aligned}
+\ket{pq}&=\sum_{nm}\braket{\Psi_{nm}}{pq}\ket{\Psi_{nm}}\\
+&=\frac1{\sqrt N}\sum_{nm}e^{-i2\pi pn/N}\delta_{p+m,q}\ket{\Psi_{nm}}\\
+
+\end{aligned}
+\end{equation}
+$$
+于是有
+$$
+\begin{equation}
+\begin{aligned}
+\ket\psi_X\ket\Phi_{AB}
+&=\frac1{\sqrt N}\sum_{p,q=0}^{N-1}\alpha_p\ket p_X\ket q_A\ket q_B\\
+&=\frac1N\sum_{pq}\sum_{nm}\ket{\Psi_{nm}}_{XA}e^{-i2\pi pn/N}\delta_{p+m,q}\alpha_p\ket q_B\\
+&=\frac1N\sum_{nm}\ket{\Psi_{nm}}_{XA}\sum_pe^{-i2\pi pn/N}\alpha_p\ket{(p+m)\mod N}_B\\
+&=\frac1N\sum_{nm}\ket{\Psi_{nm}}_{XA}\ket{\psi'}_B
+\end{aligned}
+\end{equation}
+$$
+于是 Alice 只需要在 N 能级 Bell 基下测量 XA 比特, 并将测量结果发送给 Bob.
+
+Bob 则需要根据测量结果对 B 比特做相应变换, 例如对于 $\Psi_{nm}$, 应有
+$$
+U_{nm}=\sum_k e^{i2\pi kn/N}\ket k\bra{(k+m)\mod N}:\qquad \ket{\psi'}_B\rightarrow\ket{\psi}_B
+$$
+
 
 ### 3. 混合纠缠态 $\rho(\lambda)=(1-\lambda)\ketbra{\Psi^-}{\Psi^-}+\frac\lambda 4I\otimes I$.
 
 #### (1) 求标准 teleportation 的保真度, 并且, 当 $\lambda$ 达到多少时, 保真度将优于经典极限? (所谓经典极限是指: A 方随机选择一组测量基进行测量, 并将测量结果通过经典信道通知 B, B 根据 A 的测量结果进行态制备).
 
-经典情形, 令 $\ket{\psi}=(\cos\frac\theta2,e^{i\varphi}\sin\frac\theta2)^T$
+- 对于 $\ketbra{\Psi^-}{\Psi^-}$, 保真度为 1; 对于 $I\otimes I/4$, A只能随机发送信息给B, 有 1/2 的概率恰好是对的, 于是保真度为 1/2.
+
+  从而总保真度为 $F=1-\lambda+\lambda\cdot1/2=1-\lambda/2$.
+
+- 对于经典情形, 给定 $\ket\psi=\cos\frac\theta2\ket\uparrow+e^{i\phi}\sin\frac\theta2\ket\downarrow$, 测量后表示为系综形式有 $\rho=\cos^2\frac\theta2\ketbra\uparrow\uparrow+\sin^2\frac\theta2\ketbra\downarrow\downarrow$.
+
+  于是经典情形的保真度
+  $$
+  \begin{aligned}
+  F_c&=\frac1{4\pi}\int_0^{2\pi}\mathrm{d}\phi\int_0^\pi\sin\theta\mathrm{d}\theta\bra\psi\rho\ket\psi\\
+  &=\frac12\int_{-1}^1\mathrm{d}(\cos\theta)\left(\cos^4\frac\theta2+\sin^4\frac\theta2\right)\\
+  &=\frac12\int_{-1}^1\mathrm{d}x\left[\frac{(1+x)^2}4+\frac{(1-x)^2}4\right]\\
+  &=\frac14\int_{-1}^1\mathrm{d}x\left(x^4+1\right)\\
+  &=\frac35
+  \end{aligned}
+  $$
+
+- 令 $F>F_c$, 得 $\lambda<4/5$.
 
 
 
 #### (2) 计算 $\prob{\boldsymbol n_\uparrow,\boldsymbol m_\uparrow}=\Tr\left[E_A(\boldsymbol n_\uparrow)E_B(\boldsymbol m_\uparrow)\rho(\lambda)\right]$.
+
+$$
+\begin{aligned}
+\prob{\boldsymbol n_\uparrow,\boldsymbol m_\uparrow}
+&=\Tr\left[E_A(\boldsymbol n_\uparrow)E_B(\boldsymbol m_\uparrow)\rho(\lambda)\right]\\
+&=\Tr\left[
+		\frac{I_A+\boldsymbol\sigma_A\cdot\hat{\boldsymbol n}}2\otimes
+		\frac{I_B+\boldsymbol\sigma_B\cdot\hat{\boldsymbol m}}2\cdot\rho(\lambda)
+	\right]\\
+&=\frac\lambda4\cdot\Tr\left[
+		\frac{I_A+\boldsymbol\sigma_A\cdot\hat{\boldsymbol n}}2\otimes
+		\frac{I_B+\boldsymbol\sigma_B\cdot\hat{\boldsymbol m}}2
+	\right]
+	+(1-\lambda)\cdot\left<\Psi^-\left|\left[
+		\frac{I_A+\boldsymbol\sigma_A\cdot\hat{\boldsymbol n}}2\otimes
+		\frac{I_B+\boldsymbol\sigma_B\cdot\hat{\boldsymbol m}}2
+	\right]\right|\Psi^-\right>\\
+&=\frac\lambda4\Tr\left[\frac{I_A}2\otimes\frac{I_B}2\right]
+	+\frac{1-\lambda}4\braket{\Psi^-}{\Psi^-}
+	+\frac{1-\lambda}4\bra{\Psi^-}(\boldsymbol\sigma_A\cdot\hat{\boldsymbol n})\otimes
+		(\boldsymbol\sigma_B\cdot\hat{\boldsymbol m})\ket{\Psi^-}\\
+&=\frac14+\frac{1-\lambda}4(\hat{\boldsymbol n}\cdot\hat{\boldsymbol m})
+\end{aligned}
+$$
+
