@@ -152,12 +152,12 @@ $$
   F_c&=\frac1{4\pi}\int_0^{2\pi}\mathrm{d}\phi\int_0^\pi\sin\theta\mathrm{d}\theta\bra\psi\rho\ket\psi\\
   &=\frac12\int_{-1}^1\mathrm{d}(\cos\theta)\left(\cos^4\frac\theta2+\sin^4\frac\theta2\right)\\
   &=\frac12\int_{-1}^1\mathrm{d}x\left[\frac{(1+x)^2}4+\frac{(1-x)^2}4\right]\\
-  &=\frac14\int_{-1}^1\mathrm{d}x\left(x^4+1\right)\\
-  &=\frac35
+  &=\frac14\int_{-1}^1\mathrm{d}x\left(x^2+1\right)\\
+  &=\frac23
   \end{aligned}
   $$
 
-- 令 $F>F_c$, 得 $\lambda<4/5$.
+- 令 $F>F_c$, 得 $\lambda<2/3$.
 
 
 

@@ -9,7 +9,7 @@ $$
 \newcommand{\abs}[1]{\left|#1\right|}
 \newcommand{\measure}[1]{\left<#1\right>}
 \newcommand{\cprob}[2]{\textrm{Prob}\left(#1|#2\right)}
-\newcommand{\if}{\textrm{if}\,}
+\newcommand{\if}{\textrm{if}}
 \begin{equation*}
 \end{equation*}
 $$
@@ -113,10 +113,18 @@ $$
   $$
   \sigma_bP^{a,\pm}\sigma_b=\frac{I\pm(-1)^{\delta_{ab}}\sigma_a}2=
   \begin{cases}
-  P^{a,\pm}&\if a=b\\
-  P^{a,\mp}&\if a\ne b
+  P^{a,\pm}&\if\quad a=b\\
+  P^{a,\mp}&\if\quad a\ne b
   \end{cases}
   $$
   
-- 
+- Pauli算符的平方根
+  $$
+  \sqrt{\pm_1i\sigma_b}P^{a,\pm_2}\sqrt{\mp_1\sigma_b}=\frac{I\pm_2(\delta_{ab}\sigma_a\pm_1\varepsilon_{abc}\sigma_c)}2=
+  \begin{cases}
+  P^{a,\pm_2}&\if\quad a=b\\
+  P^{c,\pm_2\cdot\pm_1\cdot\varepsilon_{abc}}	& \if \quad (a\ne b)\and (c\ne a)\and (c\ne b)
+  \end{cases}
+  $$
+  
 
